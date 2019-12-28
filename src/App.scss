@@ -1,0 +1,23 @@
+.app {
+  display: grid;
+  grid-template-areas:
+    'header'
+    'main'
+  ;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+
+  height: 100vh;
+  width: 100vw;
+
+  header {
+    grid-area: header;
+  }
+
+  main {
+    position: relative;
+    grid-area: main;
+    overflow: auto;
+    padding: 8px;
+  }
+}
