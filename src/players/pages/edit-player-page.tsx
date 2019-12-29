@@ -1,4 +1,5 @@
 import {Card, CardContent, Grid} from '@material-ui/core';
+import {push} from 'connected-react-router';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useParams} from 'react-router';
@@ -14,7 +15,10 @@ const EditPlayerPage:React.FC = () => {
   const {id = ''} = useParams();
   const player:Player = useSelector(PlayerSelectors.byId(parseInt(id)));
 
-  const onFormSave = (player:Player) => dispatch(UpdatePlayer(player));
+  const onFormSave = (player:Player) => {
+    dispatch(UpdatePlayer(player));
+    dispatch(push('/players'));
+  };
 
   if (player.isNull) {
     return (<div>404 Not found</div>);

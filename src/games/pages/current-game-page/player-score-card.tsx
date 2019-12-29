@@ -1,4 +1,4 @@
-import {Button, Grid, Paper} from '@material-ui/core';
+import {Button, ButtonGroup, Grid, Paper} from '@material-ui/core';
 import React from 'react';
 import {useDispatch} from 'react-redux';
 
@@ -25,33 +25,39 @@ const PlayerScoreCard:React.FC<PlayerScoreCardProps> = ({player}) => {
         </Grid>
 
         <Grid item xs={12} className={'score-actions'}>
-          <Button
-            variant={'outlined'} className={'score-action-btn'} size={'small'}
-            onClick={() => onScoreChange(-10)}
-          >
-            -10
-          </Button>
-          <Button
-            variant={'outlined'} className={'score-action-btn'} size={'small'}
-            onClick={() => onScoreChange(-1)}
-          >
-            -1
-          </Button>
+          <ButtonGroup>
+
+            <Button
+              variant={'outlined'} className={'score-action-btn'}
+              onClick={() => onScoreChange(-10)}
+            >
+              -10
+            </Button>
+            <Button
+              variant={'outlined'} className={'score-action-btn'}
+              onClick={() => onScoreChange(-1)}
+            >
+              -1
+            </Button>
+          </ButtonGroup>
           <span className={'cur-score'}>
             {player.score}
           </span>
-          <Button
-            variant={'outlined'} className={'score-action-btn'} size={'small'}
-            onClick={() => onScoreChange(+1)}
-          >
-            +1
-          </Button>
-          <Button
-            variant={'outlined'} className={'score-action-btn'} size={'small'}
-            onClick={() => onScoreChange(+10)}
-          >
-            +10
-          </Button>
+          <ButtonGroup>
+            <Button
+              variant={'outlined'} className={'score-action-btn'}
+              onClick={() => onScoreChange(+1)}
+            >
+              +1
+            </Button>
+            <Button
+              variant={'outlined'} className={'score-action-btn'}
+              onClick={() => onScoreChange(+10)}
+            >
+              +10
+            </Button>
+
+          </ButtonGroup>
         </Grid>
       </Grid>
     </Paper>
