@@ -8,7 +8,7 @@ import PageTitle from '../../../common/page-title';
 import {RootState} from '../../../store/root-reducer';
 import PlayersList from './players-list';
 
-const IndexPage:React.FC = () => {
+const PlayersIndexPage:React.FC = () => {
   const dispatch = useDispatch();
   const players = useSelector((state:RootState) => state.players);
   const onAddButtonClick = () => dispatch(push('/players/new'));
@@ -30,4 +30,4 @@ const IndexPage:React.FC = () => {
   );
 };
 
-export default IndexPage;
+export default PlayersIndexPage;

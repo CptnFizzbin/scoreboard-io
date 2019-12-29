@@ -1,8 +1,8 @@
 import React from 'react';
 import {Route, Switch, useRouteMatch} from 'react-router';
-import EditPage from './pages/edit-page';
-import IndexPage from './pages/index-page';
-import NewPage from './pages/new-page';
+import EditPlayerPage from './pages/edit-player-page';
+import PlayersIndexPage from './pages/players-index-page';
+import NewPlayerPage from './pages/new-player-page';
 
 const PlayerPages:React.FC = () => {
   let { path } = useRouteMatch();
@@ -10,13 +10,13 @@ const PlayerPages:React.FC = () => {
   return (
     <Switch>
       <Route exact path={`${path}/new`}>
-        <NewPage />
+        <NewPlayerPage />
       </Route>
       <Route exact path={`${path}/:id/edit`}>
-        <EditPage />
+        <EditPlayerPage />
       </Route>
       <Route exact path={path}>
-        <IndexPage />
+        <PlayersIndexPage />
       </Route>
     </Switch>
   );

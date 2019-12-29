@@ -8,7 +8,7 @@ import PlayerForm from '../player-form';
 import Player from '../player';
 import {NewPlayer} from '../player.actions';
 
-const NewPage:React.FC = () => {
+const NewPlayerPage:React.FC = () => {
   const dispatch = useDispatch();
   const onFormSave = (player:Player) => {
     dispatch(NewPlayer(player));
@@ -33,4 +33,4 @@ const NewPage:React.FC = () => {
 };
 
 
-export default NewPage;
+export default NewPlayerPage;

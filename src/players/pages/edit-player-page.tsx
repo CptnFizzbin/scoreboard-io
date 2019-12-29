@@ -9,7 +9,7 @@ import PlayerForm from '../player-form';
 import {UpdatePlayer} from '../player.actions';
 import PlayerSelectors from '../player.selectors';
 
-const EditPage:React.FC = () => {
+const EditPlayerPage:React.FC = () => {
   const dispatch = useDispatch();
   const {id = ''} = useParams();
   const player:Player = useSelector(PlayerSelectors.byId(parseInt(id)));
@@ -38,4 +38,4 @@ const EditPage:React.FC = () => {
 };
 
 
-export default EditPage;
+export default EditPlayerPage;
