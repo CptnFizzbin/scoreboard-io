@@ -1,8 +1,10 @@
+import {Card, CardContent, Grid} from '@material-ui/core';
 import {push} from 'connected-react-router';
 import React from 'react';
 import {useDispatch} from 'react-redux';
 
-import PlayerForm from '../components/player-form';
+import PageTitle from '../../common/page-title';
+import PlayerForm from '../player-form';
 import Player from '../player';
 import {NewPlayer} from '../player.actions';
 
@@ -14,10 +16,19 @@ const NewPage:React.FC = () => {
   };
 
   return (
-    <div>
-      Add Player
-      <PlayerForm onSave={onFormSave} />
-    </div>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <PageTitle>Add Player</PageTitle>
+      </Grid>
+
+      <Grid item xs={12}>
+        <Card>
+          <CardContent>
+            <PlayerForm onSave={onFormSave} />
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
   );
 };
 

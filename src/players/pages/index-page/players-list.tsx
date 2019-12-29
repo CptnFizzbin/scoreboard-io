@@ -1,11 +1,11 @@
-import {IconButton, Paper} from '@material-ui/core';
+import {Grid, IconButton, Paper} from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import {push} from 'connected-react-router';
 import React from 'react';
 import {useDispatch} from 'react-redux';
 
-import Player from '../player';
-import {PlayersState} from '../player.reducer';
+import Player from '../../player';
+import {PlayersState} from '../../player.reducer';
 
 import './players-list.scss';
 
@@ -15,11 +15,13 @@ interface PlayerListProps {
 
 const PlayersList:React.FC<PlayerListProps> = ({players}) => {
   return (
-    <div className={'players-list'}>
+    <Grid container spacing={1} className={'players-list'}>
       {players.map((player:Player) => (
-        <PlayerListItem player={player} key={player.id} />
+        <Grid item xs={12}>
+          <PlayerListItem player={player} key={player.id} />
+        </Grid>
       ))}
-    </div>
+    </Grid>
   );
 };
 
@@ -38,7 +40,6 @@ export const PlayerListItem:React.FC<PlayerListItemProps> = ({player}) => {
           <EditIcon fontSize={'small'} />
         </IconButton>
         {player.name}
-        ({player.id})
       </div>
     </Paper>
   );

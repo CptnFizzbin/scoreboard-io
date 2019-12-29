@@ -1,9 +1,11 @@
+import {Card, CardContent, Grid} from '@material-ui/core';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useParams} from 'react-router';
 
-import PlayerForm from '../components/player-form';
+import PageTitle from '../../common/page-title';
 import Player from '../player';
+import PlayerForm from '../player-form';
 import {UpdatePlayer} from '../player.actions';
 import PlayerSelectors from '../player.selectors';
 
@@ -19,10 +21,19 @@ const EditPage:React.FC = () => {
   }
 
   return (
-    <div>
-      Edit Page for {player.name}
-      <PlayerForm player={player} onSave={onFormSave} />
-    </div>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <PageTitle>Edit {player.name}</PageTitle>
+      </Grid>
+
+      <Grid item xs={12}>
+        <Card>
+          <CardContent>
+            <PlayerForm player={player} onSave={onFormSave} />
+          </CardContent>
+        </Card>
+      </Grid>
+    </Grid>
   );
 };
 
