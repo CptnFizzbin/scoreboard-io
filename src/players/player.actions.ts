@@ -41,3 +41,13 @@ export function SetScore(player:Player, score:number) {
     },
   };
 }
+
+export function SetBid(player:Player, bid:number) {
+  return {
+    type: PlayerActionTypes.UPDATE,
+    player: {
+      ...player,
+      bid,
+    },
+  };
+}

@@ -3,7 +3,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 
 import Player from '../../../players/player';
-import {SetScore} from '../../../players/player.actions';
+import {SetBid, SetScore} from '../../../players/player.actions';
 
 import './player-score-card.scss';
 
@@ -14,6 +14,7 @@ interface PlayerScoreCardProps {
 const PlayerScoreCard:React.FC<PlayerScoreCardProps> = ({player}) => {
   const dispatch = useDispatch();
   const onScoreChange = (score:number) => dispatch(SetScore(player, score));
+  const onBidChange = (bid:number) => dispatch(SetBid(player, bid));
 
   return (
     <Paper className={'player-score-card'}>
@@ -25,7 +26,8 @@ const PlayerScoreCard:React.FC<PlayerScoreCardProps> = ({player}) => {
         </Grid>
 
         <Grid item xs={12}>
-          <ScoreControls value={player.score} onChange={onScoreChange} />
+          <ScoreControls label={'Bid'} value={player.bid} onChange={onBidChange} />
+          <ScoreControls label={'Score'} value={player.score} onChange={onScoreChange} />
         </Grid>
       </Grid>
     </Paper>
@@ -34,12 +36,14 @@ const PlayerScoreCard:React.FC<PlayerScoreCardProps> = ({player}) => {
 
 interface ScoreControlsProps {
   value:number,
+  label?:string,
+
   onChange(newValue:number):void,
 }
 
-const ScoreControls:React.FC<ScoreControlsProps> = ({value, onChange}) => {
+const ScoreControls:React.FC<ScoreControlsProps> = ({label, value, onChange}) => {
   return (
-    <div className={'score-actions'}>
+    <div className={'score-controls'}>
       <ButtonGroup>
         <Button
           variant={'outlined'} className={'score-action-btn'}
@@ -54,7 +58,16 @@ const ScoreControls:React.FC<ScoreControlsProps> = ({value, onChange}) => {
           -1
         </Button>
       </ButtonGroup>
-      <span className={'cur-score'}>{value}</span>
+      <div className={'score-area'}>
+        {label && (
+          <div className={'label'}>
+            {label}
+          </div>
+        )}
+        <div className={'score'}>
+          {value}
+        </div>
+      </div>
       <ButtonGroup>
         <Button
           variant={'outlined'} className={'score-action-btn'}

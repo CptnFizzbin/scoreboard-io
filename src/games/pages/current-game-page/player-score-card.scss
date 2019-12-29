@@ -8,18 +8,22 @@
       flex-grow: 1;
     }
   }
+}
 
-  .score-actions {
-    display: flex;
-    align-items: center;
+.score-controls {
+  display: flex;
+  align-items: flex-end;
 
-    .cur-score {
-      flex-grow: 1;
-      text-align: center;
+  .score-area {
+    flex-grow: 1;
+    text-align: center;
+
+    .label {
+      font-size: 12px;
     }
+  }
 
-    .score-action-btn {
-      width: 50px;
-    }
+  .score-action-btn {
+    width: 50px;
   }
 }
