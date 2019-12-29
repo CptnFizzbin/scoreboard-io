@@ -1,7 +1,9 @@
-import {AppBar, Button, Toolbar, Typography} from '@material-ui/core';
-import {push} from 'connected-react-router';
+import {AppBar, Button, IconButton, Toolbar, Typography} from '@material-ui/core';
+import BackIcon from '@material-ui/icons/ArrowBack';
+import {goBack, push} from 'connected-react-router';
 import React from 'react';
 import {useDispatch} from 'react-redux';
+import {useLocation} from 'react-router';
 
 import './nav-bar.scss';
 
@@ -10,11 +12,12 @@ import {NavMenu} from './nav-menu';
 export const NavBar:React.FC = () => {
   const dispatch = useDispatch();
   const onPlayersClick = () => dispatch(push('/players'));
+  const {pathname} = useLocation();
 
   return (
     <AppBar position="static" className={'nav-bar'}>
       <Toolbar>
-        <NavMenu />
+        {pathname === '/' ? <NavMenu /> : <BackButton />}
         <Typography variant="h6" className={'title'}>
           Scoreboard-io
         </Typography>
@@ -23,6 +26,17 @@ export const NavBar:React.FC = () => {
         </Button>
       </Toolbar>
     </AppBar>
+  );
+};
+
+export const BackButton:React.FC = () => {
+  const dispatch = useDispatch();
+  const onButtonClick = () => dispatch(goBack());
+
+  return (
+    <IconButton edge="start" onClick={onButtonClick}>
+      <BackIcon />
+    </IconButton>
   );
 };
 

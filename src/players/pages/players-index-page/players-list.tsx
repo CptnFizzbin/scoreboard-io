@@ -17,8 +17,8 @@ const PlayersList:React.FC<PlayerListProps> = ({players}) => {
   return (
     <Grid container spacing={1} className={'players-list'}>
       {players.map((player:Player) => (
-        <Grid item xs={12}>
-          <PlayerListItem player={player} key={player.id} />
+        <Grid item xs={12} key={player.id}>
+          <PlayerListItem player={player} />
         </Grid>
       ))}
     </Grid>
