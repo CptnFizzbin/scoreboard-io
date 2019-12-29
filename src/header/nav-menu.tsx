@@ -1,63 +1,60 @@
-import {IconButton, Menu, MenuItem} from '@material-ui/core';
+import {Divider, IconButton, Menu, MenuItem} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import React from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
+import {push} from 'connected-react-router';
+import React, {SyntheticEvent} from 'react';
+import {useDispatch} from 'react-redux';
 
-class NavMenu extends React.Component {
-  constructor(props:any) {
-    super(props);
+import './nav-menu.scss';
 
-    this.state = {
-      open: false,
-    };
+export const NavMenu:React.FC = () => {
+  const [anchorEl, setAnchorEl] = React.useState<any>(null);
 
-    this.openMenu = this.openMenu.bind(this);
-    this.closeMenu = this.closeMenu.bind(this);
+  const onButtonClick = (event:SyntheticEvent) => setAnchorEl(event.target);
+  const onMenuClose = () => setAnchorEl(null);
 
-    this.onNewGameClick = this.onNewGameClick.bind(this);
-    this.onRematchClick = this.onRematchClick.bind(this);
-  }
+  return (
+    <div>
+      <IconButton edge="start" onClick={onButtonClick}>
+        <MenuIcon />
+      </IconButton>
 
-  openMenu() {
-    this.setState({
-      open: true,
-    });
-  }
+      <Menu open={Boolean(anchorEl)} anchorEl={anchorEl} onClick={onMenuClose} onClose={onMenuClose}>
+        <GamesSubMenu />
+        <Divider />
+        <PlayersSubMenu />
+      </Menu>
+    </div>
+  );
+};
 
-  closeMenu() {
-    this.setState({
-      open: false,
-    });
-  }
+const GamesSubMenu:React.FC = () => {
+  const dispatch = useDispatch();
+  const onNewGameClick = () => dispatch(push('/games/new'));
+  const onRematchClick = () => dispatch({type: 'GAME.REMATCH'});
 
-  onNewGameClick() {
-    this.props.history.push('/games/new');
-    this.closeMenu();
-  }
+  return (
+    <React.Fragment>
+      <MenuLabel>Games</MenuLabel>
+      <MenuItem onClick={onNewGameClick}>New Game</MenuItem>
+      <MenuItem onClick={onRematchClick}>Rematch</MenuItem>
+    </React.Fragment>
+  );
+};
 
-  onRematchClick() {
-    this.props.dispatch({
-      type: 'GAME.REMATCH',
-      data: {},
-    });
-    this.closeMenu();
-  }
+const PlayersSubMenu:React.FC = () => {
+  const dispatch = useDispatch();
+  const onListClick = () => dispatch(push('/players'));
 
-  render() {
-    return (
-      <React.Fragment>
-        <IconButton edge="start" onClick={this.openMenu}>
-          <MenuIcon />
-        </IconButton>
+  return (
+    <React.Fragment>
+      <MenuLabel>Players</MenuLabel>
+      <MenuItem onClick={onListClick}>List</MenuItem>
+    </React.Fragment>
+  );
+};
 
-        <Menu open={this.state.open} onClose={this.closeMenu}>
-          <MenuItem onClick={this.onNewGameClick}>New Game</MenuItem>
-          <MenuItem onClick={this.onRematchClick}>Rematch</MenuItem>
-        </Menu>
-      </React.Fragment>
-    );
-  }
-}
-
-export default withRouter(connect()(NavMenu));
+const MenuLabel:React.FC = ({children}) => {
+  return (
+    <div className={'menu-label'}>{children}</div>
+  );
+};

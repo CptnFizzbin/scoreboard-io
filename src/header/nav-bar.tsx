@@ -1,40 +1,29 @@
 import {AppBar, Button, Toolbar, Typography} from '@material-ui/core';
+import {push} from 'connected-react-router';
 import React from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
-import NavMenu from './nav-menu';
+import {useDispatch} from 'react-redux';
 
-class NavBar extends React.Component<any, any> {
-  constructor(props:any) {
-    super(props);
+import './nav-bar.scss';
 
-    this.onGamesClick = this.onGamesClick.bind(this);
-    this.onPlayersClick = this.onPlayersClick.bind(this);
-  }
+import {NavMenu} from './nav-menu';
 
-  onGamesClick() {
-    this.props.history.push('/');
-  }
+export const NavBar:React.FC = () => {
+  const dispatch = useDispatch();
+  const onPlayersClick = () => dispatch(push('/players'));
 
-  onPlayersClick() {
-    this.props.history.push('/players');
-  }
+  return (
+    <AppBar position="static" className={'nav-bar'}>
+      <Toolbar>
+        <NavMenu />
+        <Typography variant="h6" className={'title'}>
+          Scoreboard-io
+        </Typography>
+        <Button onClick={onPlayersClick}>
+          Players
+        </Button>
+      </Toolbar>
+    </AppBar>
+  );
+};
 
-  render() {
-    return (
-      <AppBar position="static">
-        <Toolbar>
-          <NavMenu />
-          <Typography variant="h6">
-            Scoreboard-io
-          </Typography>
-          <Button onClick={this.onPlayersClick}>
-            Players
-          </Button>
-        </Toolbar>
-      </AppBar>
-    );
-  }
-}
-
-export default withRouter(connect()(NavBar));
+export default NavBar;

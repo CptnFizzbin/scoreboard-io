@@ -1,0 +1,10 @@
+.menu-label {
+  font-weight: bold;
+  padding: 8px 16px;
+
+  background: lightgrey;
+
+  &:first-child {
+    margin-top: -8px;
+  }
+}
