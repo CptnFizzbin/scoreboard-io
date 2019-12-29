@@ -1,26 +1,30 @@
 import {routerMiddleware} from 'connected-react-router';
 import {createBrowserHistory} from 'history';
 import {applyMiddleware, compose, createStore} from 'redux';
+import {persistReducer, persistStore} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import rootReducer from './root-reducer';
 
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?:typeof compose;
-  }
-}
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const persistConfig = {
+  key: 'root',
+  blacklist: [
+    'router'
+  ],
+  storage,
+};
 
 export const history = createBrowserHistory();
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-export default function configureStore(preloadedState = {}) {
-  return createStore(
+export const store = createStore(
+  persistReducer(
+    persistConfig,
     rootReducer(history),
-    preloadedState,
-    composeEnhancers(
-      applyMiddleware(
-        routerMiddleware(history),
-      ),
+  ),
+  composeEnhancers(
+    applyMiddleware(
+      routerMiddleware(history),
     ),
-  );
-}
+  ),
+);
+export const persistor = persistStore(store);
