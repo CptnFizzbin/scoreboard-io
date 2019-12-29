@@ -32,12 +32,12 @@ export function DeletePlayer(player:Player):PlayerAction {
   };
 }
 
-export function ChangeScore(player:Player, amount:number) {
+export function SetScore(player:Player, score:number) {
   return {
     type: PlayerActionTypes.UPDATE,
     player: {
       ...player,
-      score: player.score + amount,
+      score,
     },
   };
 }
