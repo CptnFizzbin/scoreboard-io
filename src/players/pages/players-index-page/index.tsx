@@ -5,12 +5,12 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import PageTitle from '../../../common/page-title';
-import {RootState} from '../../../store/root-reducer';
+import PlayerSelectors from '../../player.selectors';
 import PlayersList from './players-list';
 
 const PlayersIndexPage:React.FC = () => {
   const dispatch = useDispatch();
-  const players = useSelector((state:RootState) => state.players);
+  const players = useSelector(PlayerSelectors.all());
   const onAddButtonClick = () => dispatch(push('/players/new'));
 
   return (

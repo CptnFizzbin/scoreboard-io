@@ -1,7 +1,11 @@
 .players-list {
   .player {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+
     .name {
-      padding: 8px;
+      flex-grow: 1;
     }
   }
 }

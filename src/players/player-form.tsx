@@ -24,7 +24,7 @@ const PlayerForm:React.FC<PlayerFormProps> = ({player = NullPlayer, onSave}) => 
     <form noValidate onSubmit={onFormSubmit}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <TextField value={name} onChange={onNameChange} label={'Name'} fullWidth />
+          <TextField value={name} onChange={onNameChange} label={'Name'} fullWidth autoFocus />
         </Grid>
 
         <Grid item xs={12}>

@@ -5,9 +5,11 @@ export interface PlayersState extends Array<Player> {
 }
 
 function nextId(state:PlayersState):number {
-  return state.reduce((nextId:number, player:Player) => {
-    return player.id >= nextId ? player.id + 1 : nextId;
-  }, 0);
+  return state
+    .filter((player) => Boolean(player))
+    .reduce((nextId, player) => {
+      return player.id >= nextId ? player.id + 1 : nextId;
+    }, 0);
 }
 
 const initialState:PlayersState = [
@@ -40,6 +42,13 @@ export default function playersReducer(state = initialState, action:PlayerAction
         ...action.player,
         isNull: false,
       };
+
+      return state;
+    case PlayerActionTypes.DELETE:
+      playerId = action.player.id;
+
+      state = [...state];
+      delete state[playerId];
 
       return state;
     default:

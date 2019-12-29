@@ -3,14 +3,15 @@ import EditIcon from '@material-ui/icons/Edit';
 import {push} from 'connected-react-router';
 import React from 'react';
 import {useDispatch} from 'react-redux';
+import DeleteButton from '../../../common/delete-button';
 
 import Player from '../../player';
-import {PlayersState} from '../../player.reducer';
+import {DeletePlayer} from '../../player.actions';
 
 import './players-list.scss';
 
 interface PlayerListProps {
-  players:PlayersState;
+  players:Player[];
 }
 
 const PlayersList:React.FC<PlayerListProps> = ({players}) => {
@@ -31,16 +32,21 @@ interface PlayerListItemProps {
 
 export const PlayerListItem:React.FC<PlayerListItemProps> = ({player}) => {
   const dispatch = useDispatch();
-  const onEditClick = () => dispatch(push(`/players/${player.id}/edit`));
+  const onEdit = () => dispatch(push(`/players/${player.id}/edit`));
+  const onDelete = () => {
+    dispatch(DeletePlayer(player));
+    dispatch(push('/players'));
+  };
 
   return (
     <Paper className={'player'}>
-      <div className={'name'}>
-        <IconButton onClick={onEditClick}>
-          <EditIcon fontSize={'small'} />
-        </IconButton>
+      <IconButton onClick={onEdit}>
+        <EditIcon />
+      </IconButton>
+      <span className={'name'}>
         {player.name}
-      </div>
+      </span>
+      <DeleteButton onDelete={onDelete} />
     </Paper>
   );
 };

@@ -3,6 +3,7 @@ import Player from './player';
 export const PlayerActionTypes = {
   NEW: 'PLAYER.NEW',
   UPDATE: 'PLAYER.UPDATE',
+  DELETE: 'PLAYER.DELETE',
 };
 
 export interface PlayerAction {
@@ -21,5 +22,12 @@ export function UpdatePlayer(player:Player):PlayerAction {
   return {
     type: PlayerActionTypes.UPDATE,
     player,
-  }
+  };
+}
+
+export function DeletePlayer(player:Player):PlayerAction {
+  return {
+    type: PlayerActionTypes.DELETE,
+    player,
+  };
 }
