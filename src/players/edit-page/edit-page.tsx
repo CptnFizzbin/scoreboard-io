@@ -2,30 +2,27 @@ import {TextField} from '@material-ui/core';
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useParams} from 'react-router';
-import {RootState} from '../../store/root-reducer';
 import Player, {NullPlayer} from '../player';
 import {UpdatePlayer} from '../player.actions';
+import PlayerSelectors from '../player.selectors';
 
 const EditPage:React.FC = () => {
   const dispatch = useDispatch();
-
-  const {id} = useParams();
-  const player:Player = useSelector((state:RootState) => {
-    return state.players.find((player:Player) => player.id.toString() === id) || NullPlayer;
-  });
+  const {id = ''} = useParams();
+  const player:Player = useSelector(PlayerSelectors.byId(parseInt(id)));
 
   const onFormSave = (player:Player) => dispatch(UpdatePlayer(player));
 
   if (player.isNull) {
     return (<div>404 Not found</div>);
-  } else {
-    return (
-      <div>
-        Edit Page for {player.name}
-        <PlayerForm player={player} onSave={onFormSave} />
-      </div>
-    );
   }
+
+  return (
+    <div>
+      Edit Page for {player.name}
+      <PlayerForm player={player} onSave={onFormSave} />
+    </div>
+  );
 };
 
 interface PlayerFormProps {
