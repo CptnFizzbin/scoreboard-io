@@ -31,3 +31,13 @@ export function DeletePlayer(player:Player):PlayerAction {
     player,
   };
 }
+
+export function ChangeScore(player:Player, amount:number) {
+  return {
+    type: PlayerActionTypes.UPDATE,
+    player: {
+      ...player,
+      score: player.score + amount,
+    },
+  };
+}

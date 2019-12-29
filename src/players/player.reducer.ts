@@ -12,11 +12,7 @@ function nextId(state:PlayersState):number {
     }, 0);
 }
 
-const initialState:PlayersState = [
-  {id: 0, name: 'Stephen'},
-  {id: 1, name: 'David'},
-  {id: 2, name: 'Michael'},
-];
+const initialState:PlayersState = [];
 
 export default function playersReducer(state = initialState, action:PlayerAction):PlayersState {
   let playerId:number;
@@ -29,6 +25,7 @@ export default function playersReducer(state = initialState, action:PlayerAction
       state[playerId] = {
         ...action.player,
         id: playerId,
+        score: 0,
         isNull: false,
       };
 

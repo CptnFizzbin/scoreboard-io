@@ -1,6 +1,6 @@
 import {AppBar, Button, IconButton, Toolbar, Typography} from '@material-ui/core';
 import BackIcon from '@material-ui/icons/ArrowBack';
-import {goBack, push} from 'connected-react-router';
+import {push} from 'connected-react-router';
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import {useLocation} from 'react-router';
@@ -31,7 +31,7 @@ export const NavBar:React.FC = () => {
 
 export const BackButton:React.FC = () => {
   const dispatch = useDispatch();
-  const onButtonClick = () => dispatch(goBack());
+  const onButtonClick = () => dispatch(push('/'));
 
   return (
     <IconButton edge="start" onClick={onButtonClick}>

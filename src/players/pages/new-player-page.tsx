@@ -4,8 +4,8 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 
 import PageTitle from '../../common/page-title';
-import PlayerForm from '../player-form';
 import Player from '../player';
+import PlayerForm from '../player-form';
 import {NewPlayer} from '../player.actions';
 
 const NewPlayerPage:React.FC = () => {

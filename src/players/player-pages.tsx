@@ -1,11 +1,11 @@
 import React from 'react';
 import {Route, Switch, useRouteMatch} from 'react-router';
 import EditPlayerPage from './pages/edit-player-page';
-import PlayersIndexPage from './pages/players-index-page';
 import NewPlayerPage from './pages/new-player-page';
+import PlayersIndexPage from './pages/players-index-page';
 
 const PlayerPages:React.FC = () => {
-  let { path } = useRouteMatch();
+  let {path} = useRouteMatch();
 
   return (
     <Switch>

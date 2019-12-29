@@ -1,6 +1,34 @@
 .player-score-card {
-  .cur-score {
-    flex-grow: 1;
-    text-align: center;
+  padding: 8px;
+
+  .player-info {
+    display: flex;
+
+    .player-name {
+      flex-grow: 1;
+    }
+  }
+
+  .score-actions {
+    display: flex;
+    align-items: center;
+
+    .cur-score {
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .score-action-btn {
+      margin-left: 4px;
+      margin-right: 4px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
   }
 }
