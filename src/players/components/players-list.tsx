@@ -4,8 +4,8 @@ import {push} from 'connected-react-router';
 import React from 'react';
 import {useDispatch} from 'react-redux';
 
-import Player from './player';
-import {PlayersState} from './player.reducer';
+import Player from '../player';
+import {PlayersState} from '../player.reducer';
 
 import './players-list.scss';
 
@@ -29,7 +29,7 @@ interface PlayerListItemProps {
 
 export const PlayerListItem:React.FC<PlayerListItemProps> = ({player}) => {
   const dispatch = useDispatch();
-  const onEditClick = () => dispatch(push(`/players/edit/${player.id}`));
+  const onEditClick = () => dispatch(push(`/players/${player.id}/edit`));
 
   return (
     <Paper className={'player'}>

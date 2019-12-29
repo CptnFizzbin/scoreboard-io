@@ -6,7 +6,7 @@ export interface PlayersState extends Array<Player> {
 
 function nextId(state:PlayersState):number {
   return state.reduce((nextId:number, player:Player) => {
-    return player.id > nextId ? player.id : nextId;
+    return player.id >= nextId ? player.id + 1 : nextId;
   }, 0);
 }
 
@@ -27,6 +27,7 @@ export default function playersReducer(state = initialState, action:PlayerAction
       state[playerId] = {
         ...action.player,
         id: playerId,
+        isNull: false,
       };
 
       return state;
@@ -37,6 +38,7 @@ export default function playersReducer(state = initialState, action:PlayerAction
       state[playerId] = {
         ...state[playerId],
         ...action.player,
+        isNull: false,
       };
 
       return state;
