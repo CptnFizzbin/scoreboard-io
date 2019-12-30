@@ -4,6 +4,8 @@
   .player-name {
     font-size: 20px;
     text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
   }
 }
 
