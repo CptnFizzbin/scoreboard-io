@@ -15,7 +15,7 @@ function nextId(state:PlayersState):number {
 
 const initialState:PlayersState = {};
 
-export default function playersReducer(state = initialState, action:PlayerAction):PlayersState {
+export default function PlayersReducer(state = initialState, action:PlayerAction):PlayersState {
   let playerId:number;
 
   switch (action.type) {

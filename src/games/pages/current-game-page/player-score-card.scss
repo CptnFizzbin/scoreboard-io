@@ -18,9 +18,17 @@
     .label {
       font-size: 12px;
     }
+
+    .delta {
+      display: inline-block;
+      padding-left: 8px;
+      padding-right: 8px;
+      border-radius: 8px;
+      background: lightblue;
+    }
   }
 
-  .score-action-btn {
+  .points-btn {
     width: 50px;
   }
 }

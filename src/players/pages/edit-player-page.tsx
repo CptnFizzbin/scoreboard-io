@@ -5,15 +5,15 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useParams} from 'react-router';
 
 import PageTitle from '../../common/page-title';
-import Player from '../player';
+import {RootState} from '../../store/root-reducer';
+import Player, {NullPlayer} from '../player';
 import PlayerForm from '../player-form';
 import {UpdatePlayer} from '../player.actions';
-import PlayerSelectors from '../player.selectors';
 
 const EditPlayerPage:React.FC = () => {
   const dispatch = useDispatch();
   const {id = ''} = useParams();
-  const player:Player = useSelector(PlayerSelectors.byId(parseInt(id)));
+  const player = useSelector((state:RootState):Player => state.players[parseInt(id)] || NullPlayer);
 
   const onFormSave = (player:Player) => {
     dispatch(UpdatePlayer(player));

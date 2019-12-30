@@ -1,9 +1,10 @@
 import {Button, ButtonGroup, Grid, Paper} from '@material-ui/core';
-import React from 'react';
-import {useDispatch} from 'react-redux';
+import React, {useEffect, useRef, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 
 import Player from '../../../players/player';
 import {SetBid, SetScore} from '../../../players/player.actions';
+import {RootState} from '../../../store/root-reducer';
 
 import './player-score-card.scss';
 
@@ -24,10 +25,10 @@ const PlayerScoreCard:React.FC<PlayerScoreCardProps> = ({player}) => {
         </Grid>
 
         <Grid item xs={12}>
-          <ScoreControls label={'Bid'} value={player.bid} onChange={onBidChange} />
+          <PointsCounter label={'Bid'} value={player.bid} onChange={onBidChange} trackDelta={false} />
         </Grid>
         <Grid item xs={12}>
-          <ScoreControls label={'Score'} value={player.score} onChange={onScoreChange} />
+          <PointsCounter label={'Score'} value={player.score} onChange={onScoreChange} />
         </Grid>
       </Grid>
     </Paper>
@@ -35,28 +36,50 @@ const PlayerScoreCard:React.FC<PlayerScoreCardProps> = ({player}) => {
 };
 
 interface ScoreControlsProps {
-  value:number,
   label?:string,
+  value:number,
+  trackDelta?:boolean,
 
   onChange(newValue:number):void,
 }
 
-const ScoreControls:React.FC<ScoreControlsProps> = ({label, value, onChange}) => {
+const PointsCounter:React.FC<ScoreControlsProps> = ({
+  label = '',
+  value,
+  trackDelta = true,
+  onChange,
+}) => {
+  const [delta, setDelta] = useState(0);
+  const [changed, setChanged] = useState(false);
+
+  const round = useSelector((state:RootState):number => state.game.round);
+  const roundRef = useRef(0);
+
+  const onButtonClick = (amount:number) => {
+    onChange(value + amount);
+    setDelta(delta + amount);
+    setChanged(true);
+  };
+
+  useEffect(() => {
+    if (roundRef.current !== round) {
+      roundRef.current = round;
+      setDelta(0);
+      setChanged(false);
+    }
+  }, [round]);
+
   return (
     <div className={'score-controls'}>
       <ButtonGroup>
         <Button
-          variant={'outlined'} className={'score-action-btn'}
-          onClick={() => onChange(value - 10)}
-        >
-          -10
-        </Button>
+          className={'points-btn'}
+          onClick={() => onButtonClick(-10)}
+        >-10</Button>
         <Button
-          variant={'outlined'} className={'score-action-btn'}
-          onClick={() => onChange(value - 1)}
-        >
-          -1
-        </Button>
+          className={'points-btn'}
+          onClick={() => onButtonClick(-1)}
+        >-1</Button>
       </ButtonGroup>
       <div className={'score-area'}>
         {label && (
@@ -64,26 +87,32 @@ const ScoreControls:React.FC<ScoreControlsProps> = ({label, value, onChange}) =>
             {label}
           </div>
         )}
-        <div className={'score'}>
-          {value}
-        </div>
+        {trackDelta && changed
+          ? (
+            <div className={'delta'}>
+              {delta > 0 ? `+${delta}` : delta}
+            </div>
+          )
+          : (
+            <div className={'score'}>
+              {value}
+            </div>
+          )
+        }
       </div>
       <ButtonGroup>
         <Button
-          variant={'outlined'} className={'score-action-btn'}
-          onClick={() => onChange(value + 1)}
-        >
-          +1
-        </Button>
+          className={'points-btn'}
+          onClick={() => onButtonClick(+1)}
+        >+1</Button>
         <Button
-          variant={'outlined'} className={'score-action-btn'}
-          onClick={() => onChange(value + 10)}
-        >
-          +10
-        </Button>
+          className={'points-btn'}
+          onClick={() => onButtonClick(+10)}
+        >+10</Button>
       </ButtonGroup>
     </div>
   );
+
 };
 
 export default PlayerScoreCard;

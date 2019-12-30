@@ -5,12 +5,12 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import PageTitle from '../../../common/page-title';
-import PlayerSelectors from '../../player.selectors';
+import {RootState} from '../../../store/root-reducer';
 import PlayersList from './players-list';
 
 const PlayersIndexPage:React.FC = () => {
   const dispatch = useDispatch();
-  const players = useSelector(PlayerSelectors.all());
+  const players = useSelector((state:RootState) => state.players);
   const onAddButtonClick = () => dispatch(push('/players/new'));
 
   return (
@@ -20,7 +20,7 @@ const PlayersIndexPage:React.FC = () => {
       </Grid>
 
       <Grid item xs={12}>
-        <PlayersList players={players} />
+        <PlayersList players={Object.values(players)} />
       </Grid>
 
       <Fab color={'secondary'} onClick={onAddButtonClick}>
