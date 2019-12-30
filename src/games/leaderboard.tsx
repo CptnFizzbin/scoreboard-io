@@ -1,4 +1,4 @@
-import {Paper} from '@material-ui/core';
+import {Grid, Paper} from '@material-ui/core';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import Player from '../players/player';
@@ -36,6 +36,19 @@ function placeName(place:number) {
   return place;
 }
 
+function placementSize(placements:number):12 | 6 | 4 {
+  switch (placements) {
+    case 1:
+      return 12;
+    case 2:
+      return 6;
+    case 3:
+      return 4;
+    default:
+      return 4;
+  }
+}
+
 const LeaderBoard:React.FC = () => {
   const points = useSelector((state:RootState) => state.points);
   const players = useSelector((state:RootState) => state.players);
@@ -44,14 +57,17 @@ const LeaderBoard:React.FC = () => {
     .map(([score, players]) => {
       return [parseInt(score), players];
     })
-    .sort(([pointsA], [pointsB]) => pointsB - pointsA);
+    .sort(([pointsA], [pointsB]) => pointsB - pointsA)
+    .slice(0, 3);
 
   return (
-    <Paper className={'leaderboard'}>
+    <Grid container spacing={1} className={'leaderboard'}>
       {playersByScore.map(([score, players], index) => (
-        <Placement key={score} place={index + 1} score={score} players={players} />
+        <Grid key={score} item xs={12} sm={placementSize(playersByScore.length)}>
+          <Placement place={index + 1} score={score} players={players} />
+        </Grid>
       ))}
-    </Paper>
+    </Grid>
   );
 };
 
@@ -63,19 +79,20 @@ interface PlacementProps {
 
 const Placement:React.FC<PlacementProps> = ({place, score, players}) => {
   return (
-    <div className={'placement'}>
-      <span className={'label'}>
+    <Paper className={'placement'}>
+      <div className={'label'}>
         <span className={`place place-${place}`}>
           {placeName(place)}
         </span>
         <span className={`score`}>
           {score}
         </span>
-      </span>
-      <span className={'players'}>
+      </div>
+
+      <div className={'players'}>
         {players.map((player) => player.name).join(', ')}
-      </span>
-    </div>
+      </div>
+    </Paper>
   );
 };
 

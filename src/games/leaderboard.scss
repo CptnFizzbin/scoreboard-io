@@ -1,8 +1,9 @@
 .leaderboard {
   .placement {
+    padding: 8px;
+
     .label {
       display: inline-block;
-      margin: 8px;
       background: lightgrey;
       border-radius: 8px;
 
@@ -37,6 +38,18 @@
 
     .players {
       display: inline-block;
+      padding: 4px 8px;
+    }
+
+  }
+
+  @media (min-width: 600px) {
+    .placement {
+      text-align: center;
+
+      .players {
+        display: block;
+      }
     }
   }
 }

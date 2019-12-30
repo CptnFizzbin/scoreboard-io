@@ -1,4 +1,4 @@
-import {Button, Grid} from '@material-ui/core';
+import {Button, Divider, Grid} from '@material-ui/core';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store/root-reducer';
@@ -18,17 +18,17 @@ const GamePage:React.FC = () => {
       </Grid>
 
       <Grid item xs={12}>
-        <Grid container spacing={1}>
-          {Object.values(players).map((player) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={player.id}>
-              <PlayerScoreCard player={player} />
-            </Grid>
-          ))}
+        <Divider />
+      </Grid>
 
-          <Grid item xs={12}>
-            <Button variant={'contained'} color={'secondary'} fullWidth onClick={onEndRound}>End Round</Button>
-          </Grid>
+      {Object.values(players).map((player) => (
+        <Grid item xs={12} sm={6} md={4} lg={3} key={player.id}>
+          <PlayerScoreCard player={player} />
         </Grid>
+      ))}
+
+      <Grid item xs={12}>
+        <Button variant={'contained'} color={'secondary'} fullWidth onClick={onEndRound}>End Round</Button>
       </Grid>
     </Grid>
   );
