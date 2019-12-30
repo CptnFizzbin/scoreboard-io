@@ -6,7 +6,7 @@ import {Rematch} from '../games/game.actions';
 
 import './nav-menu.scss';
 
-export const NavMenu:React.FC = () => {
+export const GameMenu:React.FC = () => {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState<any>(null);
 

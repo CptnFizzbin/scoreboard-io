@@ -1,4 +1,5 @@
-import {Button, Divider, Grid} from '@material-ui/core';
+import {Divider, Fab, Grid} from '@material-ui/core';
+import NextRoundIcon from '@material-ui/icons/NavigateNext';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import PageTitle from '../common/page-title';
@@ -15,7 +16,7 @@ const GamePage:React.FC = () => {
   const onEndRound = () => dispatch(EndRound());
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} className={'page-with-fab'}>
       <Grid item xs={12}>
         <PageTitle>Round {round}</PageTitle>
       </Grid>
@@ -34,9 +35,10 @@ const GamePage:React.FC = () => {
         </Grid>
       ))}
 
-      <Grid item xs={12}>
-        <Button variant={'contained'} color={'secondary'} fullWidth onClick={onEndRound}>End Round</Button>
-      </Grid>
+      <Fab color={'secondary'} variant="extended" onClick={onEndRound}>
+        End Round
+        <NextRoundIcon />
+      </Fab>
     </Grid>
   );
 };

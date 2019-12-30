@@ -7,7 +7,7 @@ import {useLocation} from 'react-router';
 
 import './nav-bar.scss';
 
-import {NavMenu} from './nav-menu';
+import {GameMenu} from './game-menu';
 
 export const NavBar:React.FC = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ export const NavBar:React.FC = () => {
   return (
     <AppBar position="fixed" className={'nav-bar'}>
       <Toolbar>
-        {pathname === '/' ? <NavMenu /> : <BackButton />}
+        {pathname === '/' ? <GameMenu /> : <BackButton />}
         <Typography variant="h6" className={'title'}>
           Scoreboard-io
         </Typography>
