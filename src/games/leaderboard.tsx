@@ -1,33 +1,31 @@
 import {Paper} from '@material-ui/core';
 import React from 'react';
 import {useSelector} from 'react-redux';
-
 import Player from '../players/player';
+import {PlayersState} from '../players/player.reducer';
+import {PointsState} from '../points/points.reducer';
 import {RootState} from '../store/root-reducer';
 
 import './leaderboard.scss';
 
-function groupPlayersByScore(players:Player[]):({ score:number, players:Player[] })[] {
-  let playersByScore:{
-    [score:number]:Player[]
-  } = {};
+interface IdsByPoints {
+  [points:number]:Player[],
+}
 
-  players.reduce((scores, player) => {
-    if (!scores[player.score]) scores[player.score] = [];
-    scores[player.score].push(player);
-    return scores;
-  }, playersByScore);
+function groupByPoints(points:PointsState, players:PlayersState, pointsName:string):IdsByPoints {
+  const idsByPoints:IdsByPoints = {};
 
-  return Object.entries(playersByScore)
-    .map(([score, players]) => ({
-      score: parseInt(score),
-      players,
-    }))
-    .sort((a, b) => {
-      if (a.score > b.score) return -1;
-      if (a.score === b.score) return 0;
-      return 1;
-    });
+  return Object.values(players)
+    .reduce((playersByPoints, player) => {
+      const value:number = points[player.id]?.[pointsName] || 0;
+
+      if (!playersByPoints[value]) {
+        playersByPoints[value] = [];
+      }
+      playersByPoints[value].push(player);
+
+      return playersByPoints;
+    }, idsByPoints);
 }
 
 function placeName(place:number) {
@@ -39,12 +37,18 @@ function placeName(place:number) {
 }
 
 const LeaderBoard:React.FC = () => {
-  const players = Object.values(useSelector((state:RootState) => state.players));
-  const playersByScore = groupPlayersByScore(players);
+  const points = useSelector((state:RootState) => state.points);
+  const players = useSelector((state:RootState) => state.players);
+
+  const playersByScore = Object.entries(groupByPoints(points, players, 'score'))
+    .map(([score, players]) => {
+      return [parseInt(score), players];
+    })
+    .sort(([pointsA], [pointsB]) => pointsB - pointsA);
 
   return (
     <Paper className={'leaderboard'}>
-      {playersByScore.map(({score, players}, index) => (
+      {playersByScore.map(([score, players], index) => (
         <Placement key={score} place={index + 1} score={score} players={players} />
       ))}
     </Paper>

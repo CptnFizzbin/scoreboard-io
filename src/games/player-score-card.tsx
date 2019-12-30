@@ -25,10 +25,10 @@ const PlayerScoreCard:React.FC<PlayerScoreCardProps> = ({player}) => {
         </Grid>
 
         <Grid item xs={12}>
-          <PointsCounter label={'Bid'} value={player.bid} onChange={onBidChange} trackDelta={false} />
+          <PointsCounter label={'Bid'} name={'bid'} playerId={player.id} onChange={onBidChange} trackDelta={false} />
         </Grid>
         <Grid item xs={12}>
-          <PointsCounter label={'Score'} value={player.score} onChange={onScoreChange} />
+          <PointsCounter label={'Score'} name={'score'} playerId={player.id} onChange={onScoreChange} />
         </Grid>
       </Grid>
     </Paper>
@@ -36,38 +36,44 @@ const PlayerScoreCard:React.FC<PlayerScoreCardProps> = ({player}) => {
 };
 
 interface ScoreControlsProps {
+  name:string,
+  playerId:number,
+
   label?:string,
-  value:number,
   trackDelta?:boolean,
 
   onChange(newValue:number):void,
 }
 
 const PointsCounter:React.FC<ScoreControlsProps> = ({
+  name,
+  playerId,
+
   label = '',
-  value,
   trackDelta = true,
+
   onChange,
 }) => {
   const [delta, setDelta] = useState(0);
   const [changed, setChanged] = useState(false);
 
-  const round = useSelector((state:RootState):number => state.game.round);
-  const roundRef = useRef(0);
+  const points = useSelector((state:RootState):number => state.points?.[playerId]?.[name] || 0);
+  const game = useSelector((state:RootState):number => state.game.round);
+  const gameRef = useRef(0);
 
   const onButtonClick = (amount:number) => {
-    onChange(value + amount);
+    onChange(points + amount);
     setDelta(delta + amount);
     setChanged(true);
   };
 
   useEffect(() => {
-    if (roundRef.current !== round) {
-      roundRef.current = round;
+    if (gameRef.current !== game) {
+      gameRef.current = game;
       setDelta(0);
       setChanged(false);
     }
-  }, [round]);
+  }, [game]);
 
   return (
     <div className={'score-controls'}>
@@ -95,7 +101,7 @@ const PointsCounter:React.FC<ScoreControlsProps> = ({
           )
           : (
             <div className={'score'}>
-              {value}
+              {points}
             </div>
           )
         }
@@ -112,7 +118,6 @@ const PointsCounter:React.FC<ScoreControlsProps> = ({
       </ButtonGroup>
     </div>
   );
-
 };
 
 export default PlayerScoreCard;

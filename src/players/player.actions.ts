@@ -1,3 +1,4 @@
+import {SetPoints} from '../points/points.actions';
 import Player from './player';
 
 export const PlayerActionTypes = {
@@ -33,21 +34,9 @@ export function DeletePlayer(player:Player):PlayerAction {
 }
 
 export function SetScore(player:Player, score:number) {
-  return {
-    type: PlayerActionTypes.UPDATE,
-    player: {
-      ...player,
-      score,
-    },
-  };
+  return SetPoints(player.id, 'score', score);
 }
 
 export function SetBid(player:Player, bid:number) {
-  return {
-    type: PlayerActionTypes.UPDATE,
-    player: {
-      ...player,
-      bid,
-    },
-  };
+  return SetPoints(player.id, 'bid', bid);
 }
