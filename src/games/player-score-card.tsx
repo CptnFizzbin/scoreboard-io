@@ -2,9 +2,9 @@ import {Button, ButtonGroup, Grid, Paper} from '@material-ui/core';
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
-import Player from '../../../players/player';
-import {SetBid, SetScore} from '../../../players/player.actions';
-import {RootState} from '../../../store/root-reducer';
+import Player from '../players/player';
+import {SetBid, SetScore} from '../players/player.actions';
+import {RootState} from '../store/root-reducer';
 
 import './player-score-card.scss';
 

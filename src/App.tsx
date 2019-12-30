@@ -7,8 +7,7 @@ import {Route, Switch} from 'react-router-dom';
 import {PersistGate} from 'redux-persist/integration/react';
 
 import './App.scss';
-import GamePages from './games/game-pages';
-import CurrentGamePage from './games/pages/current-game-page';
+import GamePage from './games/game-page';
 import {Header} from './header';
 import PlayerPages from './players/player-pages';
 import {history, persistor, store} from './store';
@@ -48,11 +47,8 @@ const App:React.FC = () => {
                 <Route path="/players">
                   <PlayerPages />
                 </Route>
-                <Route path="/games">
-                  <GamePages />
-                </Route>
                 <Route path="/">
-                  <CurrentGamePage />
+                  <GamePage />
                 </Route>
               </Switch>
             </main>

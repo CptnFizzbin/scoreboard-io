@@ -1,11 +1,11 @@
 import {Button, Grid} from '@material-ui/core';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../../store/root-reducer';
-import {EndRound} from '../../game.actions';
+import {RootState} from '../store/root-reducer';
+import {EndRound} from './game.actions';
 import PlayerScoreCard from './player-score-card';
 
-const CurrentGamePage:React.FC = () => {
+const GamePage:React.FC = () => {
   const dispatch = useDispatch();
   const players = useSelector((state:RootState) => state.players);
   const onEndRound = () => dispatch(EndRound());
@@ -24,4 +24,4 @@ const CurrentGamePage:React.FC = () => {
   );
 };
 
-export default CurrentGamePage;
+export default GamePage;
