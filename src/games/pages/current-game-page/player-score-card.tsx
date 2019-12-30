@@ -19,14 +19,14 @@ const PlayerScoreCard:React.FC<PlayerScoreCardProps> = ({player}) => {
   return (
     <Paper className={'player-score-card'}>
       <Grid container spacing={1}>
-        <Grid item xs={12} className={'player-info'}>
-          <span className={'player-name'}>
-            {player.name}
-          </span>
+        <Grid item xs={12} className={'player-name'}>
+          {player.name}
         </Grid>
 
         <Grid item xs={12}>
           <ScoreControls label={'Bid'} value={player.bid} onChange={onBidChange} />
+        </Grid>
+        <Grid item xs={12}>
           <ScoreControls label={'Score'} value={player.score} onChange={onScoreChange} />
         </Grid>
       </Grid>

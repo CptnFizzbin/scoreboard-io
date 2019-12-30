@@ -1,4 +1,4 @@
-import {createMuiTheme, CssBaseline, ThemeProvider} from '@material-ui/core';
+import {Container, createMuiTheme, CssBaseline, ThemeProvider} from '@material-ui/core';
 import {cyan, teal} from '@material-ui/core/colors';
 import {ConnectedRouter} from 'connected-react-router';
 import React from 'react';
@@ -42,19 +42,21 @@ const App:React.FC = () => {
         <div className="app">
           <Header />
 
-          <main>
-            <Switch>
-              <Route path="/players">
-                <PlayerPages />
-              </Route>
-              <Route path="/games">
-                <GamePages />
-              </Route>
-              <Route path="/">
-                <CurrentGamePage />
-              </Route>
-            </Switch>
-          </main>
+          <Container>
+            <main>
+              <Switch>
+                <Route path="/players">
+                  <PlayerPages />
+                </Route>
+                <Route path="/games">
+                  <GamePages />
+                </Route>
+                <Route path="/">
+                  <CurrentGamePage />
+                </Route>
+              </Switch>
+            </main>
+          </Container>
         </div>
       </ConnectedRouter>
     </AppWrapper>

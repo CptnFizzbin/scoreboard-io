@@ -15,7 +15,7 @@ export const NavBar:React.FC = () => {
   const {pathname} = useLocation();
 
   return (
-    <AppBar position="static" className={'nav-bar'}>
+    <AppBar position="fixed" className={'nav-bar'}>
       <Toolbar>
         {pathname === '/' ? <NavMenu /> : <BackButton />}
         <Typography variant="h6" className={'title'}>

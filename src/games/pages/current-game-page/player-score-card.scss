@@ -1,12 +1,9 @@
 .player-score-card {
   padding: 8px;
 
-  .player-info {
-    display: flex;
-
-    .player-name {
-      flex-grow: 1;
-    }
+  .player-name {
+    font-size: 20px;
+    text-align: center;
   }
 }
 

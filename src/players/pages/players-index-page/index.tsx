@@ -23,7 +23,7 @@ const PlayersIndexPage:React.FC = () => {
         <PlayersList players={players} />
       </Grid>
 
-      <Fab color={'primary'} onClick={onAddButtonClick}>
+      <Fab color={'secondary'} onClick={onAddButtonClick}>
         <AddIcon />
       </Fab>
     </Grid>

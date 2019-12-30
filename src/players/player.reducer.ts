@@ -62,6 +62,17 @@ export default function playersReducer(state = initialState, action:PlayerAction
           return state
         }, {});
       return state;
+    case GameActionTypes.END_ROUND:
+      state = Object.values(state)
+        .map((player):Player => ({
+          ...player,
+          bid: 0,
+        }))
+        .reduce((state:PlayersState, player) => {
+          state[player.id] = player;
+          return state
+        }, {});
+      return state;
     default:
       return state;
   }
