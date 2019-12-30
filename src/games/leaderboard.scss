@@ -1,0 +1,42 @@
+.leaderboard {
+  .placement {
+    .label {
+      display: inline-block;
+      margin: 8px;
+      background: lightgrey;
+      border-radius: 8px;
+
+      .place, .score {
+        display: inline-block;
+        padding: 4px 8px;
+        text-align: center;
+        width: 50px;
+      }
+
+      .place {
+        background: lightblue;
+        border-radius: 8px;
+        color: black;
+
+        &.place-1 {
+          background: goldenrod;
+          color: white;
+        }
+
+        &.place-2 {
+          background: darkgrey;
+          color: white;
+        }
+
+        &.place-3 {
+          background: saddlebrown;
+          color: white;
+        }
+      }
+    }
+
+    .players {
+      display: inline-block;
+    }
+  }
+}
