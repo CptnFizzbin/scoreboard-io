@@ -1,11 +1,7 @@
 import {AnyAction} from 'redux';
 import {PlayerActionTypes} from '../players/player.actions';
+import {GameState} from '../store/state';
 import {GameActionTypes} from './game.actions';
-
-export interface GameState {
-  round:number;
-  dealerId:number | null;
-}
 
 const initialState:GameState = {
   round: 1,

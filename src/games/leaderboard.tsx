@@ -1,10 +1,10 @@
-import {Grid, Paper} from '@material-ui/core';
+import {Grid} from '@material-ui/core';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import Player from '../players/player';
 import {PlayersState} from '../players/player.reducer';
-import {PointsState} from '../points/points.reducer';
 import {RootState} from '../store/root-reducer';
+import {PointsState} from '../store/state';
 
 import './leaderboard.scss';
 
@@ -61,7 +61,7 @@ const LeaderBoard:React.FC = () => {
     .slice(0, 3);
 
   return (
-    <Grid container spacing={1} className={'leaderboard'}>
+    <Grid container spacing={0} className={'leaderboard'}>
       {playersByScore.map(([score, players], index) => (
         <Grid key={score} item xs={12} sm={placementSize(playersByScore.length)}>
           <Placement place={index + 1} score={score} players={players} />
@@ -79,7 +79,7 @@ interface PlacementProps {
 
 const Placement:React.FC<PlacementProps> = ({place, score, players}) => {
   return (
-    <Paper className={'placement'}>
+    <div className={'placement'}>
       <div className={'label'}>
         <span className={`place place-${place}`}>
           {placeName(place)}
@@ -92,7 +92,7 @@ const Placement:React.FC<PlacementProps> = ({place, score, players}) => {
       <div className={'players'}>
         {players.map((player) => player.name).join(', ')}
       </div>
-    </Paper>
+    </div>
   );
 };
 
