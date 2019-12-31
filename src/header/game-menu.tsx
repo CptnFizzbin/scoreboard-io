@@ -4,7 +4,7 @@ import React, {SyntheticEvent} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Rematch} from '../games/game.actions';
 
-import './nav-menu.scss';
+import './game-menu.scss';
 import {RootState} from '../store/root-reducer';
 
 export const GameMenu:React.FC = () => {
@@ -17,7 +17,7 @@ export const GameMenu:React.FC = () => {
 
   const onRematch = () => {
     const firstPlayer = Object.values(players)[0];
-    dispatch(Rematch(firstPlayer.id));
+    dispatch(Rematch(firstPlayer?.id));
   };
 
   return (

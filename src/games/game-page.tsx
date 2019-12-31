@@ -1,5 +1,6 @@
-import {Divider, Fab, Grid} from '@material-ui/core';
+import {Button, Divider, Grid} from '@material-ui/core';
 import NextRoundIcon from '@material-ui/icons/NavigateNext';
+import {push} from 'connected-react-router';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import PageTitle from '../common/page-title';
@@ -12,7 +13,11 @@ const GamePage:React.FC = () => {
   const dispatch = useDispatch();
   const players = useSelector((state:RootState) => state.players);
   const round = useSelector((state:RootState) => state.game.round);
-  const dealerId = useSelector((state:RootState) => state.game.dealerId);
+
+  let dealerId = useSelector((state:RootState) => state.game.dealerId);
+  if (dealerId == null) {
+    dealerId = Object.values(players)[0]?.id;
+  }
 
   const onEndRound = () => {
     let playerIds = Object.values(players);
@@ -21,8 +26,24 @@ const GamePage:React.FC = () => {
     dispatch(EndRound(nextDealer.id));
   };
 
+  if (Object.values(players).length === 0) {
+    const onAddPlayer = () => dispatch(push('/players/new'));
+
+    return (
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <PageTitle>No players found</PageTitle>
+        </Grid>
+
+        <Grid item xs={12}>
+          <Button onClick={onAddPlayer} fullWidth variant={'outlined'}>Add Player</Button>
+        </Grid>
+      </Grid>
+    );
+  }
+
   return (
-    <Grid container spacing={2} className={'page-with-fab'}>
+    <Grid container spacing={2}>
       <Grid item xs={12}>
         <PageTitle>Round {round}</PageTitle>
       </Grid>
@@ -41,10 +62,12 @@ const GamePage:React.FC = () => {
         </Grid>
       ))}
 
-      <Fab color={'secondary'} variant="extended" onClick={onEndRound}>
-        End Round
-        <NextRoundIcon />
-      </Fab>
+      <Grid item xs={12}>
+        <Button color={'secondary'} variant="contained" fullWidth onClick={onEndRound}>
+          End Round
+          <NextRoundIcon />
+        </Button>
+      </Grid>
     </Grid>
   );
 };

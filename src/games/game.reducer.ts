@@ -1,4 +1,6 @@
-import {GameAction, GameActionTypes} from './game.actions';
+import {AnyAction} from 'redux';
+import {PlayerActionTypes} from '../players/player.actions';
+import {GameActionTypes} from './game.actions';
 
 export interface GameState {
   round:number;
@@ -10,8 +12,17 @@ const initialState:GameState = {
   dealerId: null,
 };
 
-export default function GameReducer(state = initialState, action:GameAction):GameState {
+export default function GameReducer(state = initialState, action:AnyAction):GameState {
   switch (action.type) {
+    case PlayerActionTypes.DELETE:
+      if (action.player.id === state.dealerId) {
+        return {
+          ...state,
+          dealerId: null,
+        };
+      } else {
+        return state;
+      }
     case GameActionTypes.END_ROUND:
       return {
         ...state,
