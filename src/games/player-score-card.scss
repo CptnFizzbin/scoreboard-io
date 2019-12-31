@@ -6,6 +6,11 @@
     text-align: center;
     overflow: hidden;
     white-space: nowrap;
+
+    &.dealer {
+      background: goldenrod;
+      color: white;
+    }
   }
 }
 

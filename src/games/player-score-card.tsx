@@ -10,9 +10,13 @@ import './player-score-card.scss';
 
 interface PlayerScoreCardProps {
   player:Player;
+  isDealer:boolean;
 }
 
-const PlayerScoreCard:React.FC<PlayerScoreCardProps> = ({player}) => {
+const PlayerScoreCard:React.FC<PlayerScoreCardProps> = ({
+  player,
+  isDealer,
+}) => {
   const dispatch = useDispatch();
   const onScoreChange = (score:number) => dispatch(SetScore(player, score));
   const onBidChange = (bid:number) => dispatch(SetBid(player, bid));
@@ -20,7 +24,7 @@ const PlayerScoreCard:React.FC<PlayerScoreCardProps> = ({player}) => {
   return (
     <Paper className={'player-score-card'}>
       <Grid container spacing={1}>
-        <Grid item xs={12} className={'player-name'}>
+        <Grid item xs={12} className={`player-name ${isDealer && 'dealer'}`}>
           {player.name}
         </Grid>
 
