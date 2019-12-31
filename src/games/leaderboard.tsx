@@ -2,9 +2,8 @@ import {Grid} from '@material-ui/core';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import Player from '../players/player';
-import {PlayersState} from '../players/player.reducer';
 import {RootState} from '../store/root-reducer';
-import {PointsState} from '../store/state';
+import {PlayersState, PointsState} from '../store/state';
 
 import './leaderboard.scss';
 

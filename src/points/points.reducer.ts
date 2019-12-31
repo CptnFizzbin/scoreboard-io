@@ -1,16 +1,11 @@
 import {AnyAction} from 'redux';
 import {GameActionTypes} from '../games/game.actions';
+import {PointsState} from '../store/state';
 import {PointsActionTypes} from './points.actions';
-
-export interface PointsState {
-  [playerId:number]:{
-    [label:string]:number;
-  }
-}
 
 const initialState:PointsState = {};
 
-export function PointsReducer(state = initialState, action:AnyAction) {
+export default function PointsReducer(state = initialState, action:AnyAction) {
   switch (action.type) {
     case GameActionTypes.REMATCH:
       return initialState;

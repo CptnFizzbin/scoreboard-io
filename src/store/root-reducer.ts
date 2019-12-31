@@ -1,18 +1,13 @@
-import {connectRouter, RouterState} from 'connected-react-router';
+import {connectRouter} from 'connected-react-router';
 import {combineReducers} from 'redux';
+import GameReducer from '../games/game.reducer';
+import PlayersReducer from '../players/player.reducer';
+import PointsReducer from '../points/points.reducer';
+import State from './state';
 
-import GameReducer, {GameState} from '../games/game.reducer';
-import PlayersReducer, {PlayersState} from '../players/player.reducer';
-import {PointsReducer, PointsState} from '../points/points.reducer';
+export interface RootState extends State {}
 
-export interface RootState {
-  router:RouterState,
-  game:GameState,
-  players:PlayersState,
-  points:PointsState,
-}
-
-const rootReducer = (history:any) => combineReducers({
+const RootReducer = (history:any) => combineReducers({
   router: connectRouter(history),
 
   game: GameReducer,
@@ -20,4 +15,4 @@ const rootReducer = (history:any) => combineReducers({
   points: PointsReducer,
 });
 
-export default rootReducer;
+export default RootReducer;

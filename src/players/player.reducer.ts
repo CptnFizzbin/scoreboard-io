@@ -1,9 +1,5 @@
-import Player from './player';
+import {PlayersState} from '../store/state';
 import {PlayerAction, PlayerActionTypes} from './player.actions';
-
-export interface PlayersState {
-  [index:number]:Player
-}
 
 function nextId(state:PlayersState):number {
   return Object.values(state)
