@@ -3,12 +3,12 @@ import {push} from 'connected-react-router';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import PageTitle from '../../../common/page-title';
-import {RootState} from '../../../store/root-reducer';
+import State from '../../../store/state';
 import PlayersList from './players-list';
 
 const PlayersIndexPage:React.FC = () => {
   const dispatch = useDispatch();
-  const players = useSelector((state:RootState) => state.players);
+  const players = useSelector((state:State) => state.players);
   const onAddPlayer = () => dispatch(push('/players/new'));
 
   return (

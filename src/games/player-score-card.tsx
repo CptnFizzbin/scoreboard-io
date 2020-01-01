@@ -1,30 +1,30 @@
 import {Button, ButtonGroup, Grid, Paper} from '@material-ui/core';
 import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-
 import Player from '../players/player';
 import {SetBid, SetScore} from '../players/player.actions';
-import {RootState} from '../store/root-reducer';
+import State, {useGame, useGameSettings} from '../store/state';
 
 import './player-score-card.scss';
 
 interface PlayerScoreCardProps {
   player:Player;
-  isDealer:boolean;
 }
 
 const PlayerScoreCard:React.FC<PlayerScoreCardProps> = ({
   player,
-  isDealer,
 }) => {
   const dispatch = useDispatch();
+  const useDealer = useGameSettings((state) => state.useDealer);
+  const dealerId = useGame((state) => state.dealerId);
+
   const onScoreChange = (score:number) => dispatch(SetScore(player, score));
   const onBidChange = (bid:number) => dispatch(SetBid(player, bid));
 
   return (
     <Paper className={'player-score-card'}>
       <Grid container spacing={1}>
-        <Grid item xs={12} className={`player-name ${isDealer && 'dealer'}`}>
+        <Grid item xs={12} className={`player-name ${useDealer && player.id === dealerId && 'dealer'}`}>
           {player.name}
         </Grid>
 
@@ -61,8 +61,8 @@ const PointsCounter:React.FC<ScoreControlsProps> = ({
   const [delta, setDelta] = useState(0);
   const [changed, setChanged] = useState(false);
 
-  const points = useSelector((state:RootState):number => state.points?.[playerId]?.[name] || 0);
-  const game = useSelector((state:RootState):number => state.game.round);
+  const points = useSelector((state:State):number => state.points?.[playerId]?.[name] || 0);
+  const game = useSelector((state:State):number => state.game.round);
   const gameRef = useRef(0);
 
   const onButtonClick = (amount:number) => {

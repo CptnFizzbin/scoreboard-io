@@ -5,31 +5,29 @@ export const GameActionTypes = {
   UPDATE_SETTINGS: 'GAME.UPDATE_SETTINGS',
 };
 
-export interface GameSettings {
-  dealer?:boolean;
-}
-
 export interface GameAction {
   type:string;
   dealerId?:number;
   settings?:GameSettings;
 }
 
-export function Rematch(dealerId:number):GameAction {
+interface GameSettings {
+  useDealer?:boolean;
+}
+
+export function Rematch():GameAction {
   return {
     type: GameActionTypes.REMATCH,
-    dealerId,
   };
 }
 
-export function EndRound(dealerId:number):GameAction {
+export function EndRound():GameAction {
   return {
     type: GameActionTypes.END_ROUND,
-    dealerId,
   };
 }
 
-export function SetDealer(dealerId:number):GameAction {
+export function SetDealer(dealerId?:number):GameAction {
   return {
     type: GameActionTypes.SET_DEALER,
     dealerId,

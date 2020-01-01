@@ -2,8 +2,7 @@ import {Grid} from '@material-ui/core';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import Player from '../players/player';
-import {RootState} from '../store/root-reducer';
-import {PlayersState, PointsState} from '../store/state';
+import State, {PlayersState, PointsState} from '../store/state';
 
 import './leaderboard.scss';
 
@@ -49,8 +48,8 @@ function placementSize(placements:number):12 | 6 | 4 {
 }
 
 const LeaderBoard:React.FC = () => {
-  const points = useSelector((state:RootState) => state.points);
-  const players = useSelector((state:RootState) => state.players);
+  const points = useSelector((state:State) => state.points);
+  const players = useSelector((state:State) => state.players);
 
   const playersByScore = Object.entries(groupByPoints(points, players, 'score'))
     .map(([score, players]) => {

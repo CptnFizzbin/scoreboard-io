@@ -1,23 +1,25 @@
 import {Dialog, DialogTitle, List, ListItem, ListItemText} from '@material-ui/core';
 import React from 'react';
-import {useSelector} from 'react-redux';
-import {RootState} from '../store/root-reducer';
+import {PlayersState, usePlayers} from '../store/state';
 import Player from './player';
 
 interface PlayerSelectDialogProps {
   open:boolean;
+  selectedId:number;
 
   onSelect(selected?:Player):void;
 }
 
 const PlayerSelectDialog:React.FC<PlayerSelectDialogProps> = ({
   open,
+  selectedId,
   onSelect,
 }) => {
-  const players = useSelector((state:RootState) => state.players);
+  const players = usePlayers<PlayersState>();
+  const selectedPlayer = usePlayers<Player | undefined>((state) => state[selectedId]);
 
   return (
-    <Dialog open={open} onClose={() => onSelect()}>
+    <Dialog open={open} onClose={() => onSelect(selectedPlayer)}>
       <DialogTitle>Choose Player</DialogTitle>
       <List>
         {Object.values(players).map((player) => (

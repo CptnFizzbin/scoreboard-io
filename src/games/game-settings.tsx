@@ -1,18 +1,33 @@
 import {FormControlLabel, Grid, Switch} from '@material-ui/core';
 import React from 'react';
-import PageTitle from '../common/page-title';
+import {useDispatch} from 'react-redux';
+import Player from '../players/player';
+import {useGameSettings, usePlayers} from '../store/state';
+import {SetDealer, UpdateSetting} from './game.actions';
 
 const GameSettings:React.FC = () => {
+  const dispatch = useDispatch();
+  const useDealer = useGameSettings((state) => state.useDealer);
+  const firstPlayer = usePlayers<Player | undefined>((state) => Object.values(state)[0]);
+
+  const toggleUseDealer = () => {
+    const newValue = !useDealer;
+
+    dispatch(UpdateSetting({
+      useDealer: newValue,
+    }));
+
+    if (newValue) {
+      dispatch(SetDealer(firstPlayer?.id));
+    }
+  };
+
   return (
     <Grid container>
       <Grid item xs={12}>
-        <PageTitle>Settings</PageTitle>
-      </Grid>
-      <Grid item xs={12}>
-        <FormControlLabel
-          control={<Switch checked={checked} onChange={toggleChecked} />}
-          label="Normal"
-        />
+        <FormControlLabel label="Use Dealer" control={
+          <Switch checked={useDealer} onChange={toggleUseDealer} />
+        } />
       </Grid>
     </Grid>
   );
