@@ -9,6 +9,17 @@ export default function PointsReducer(state = initialState, action:AnyAction) {
   switch (action.type) {
     case GameActionTypes.REMATCH:
       return initialState;
+    case GameActionTypes.END_ROUND:
+      Object.entries(state).forEach(([playerId, scores]) => {
+        state = {
+          ...state,
+          [playerId]: {
+            ...scores,
+            bid: 0,
+          }
+        }
+      });
+      return state;
     case PointsActionTypes.SET:
       return {
         ...state,

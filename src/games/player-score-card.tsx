@@ -1,5 +1,5 @@
 import {Button, ButtonGroup, Grid, Paper} from '@material-ui/core';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Player from '../players/player';
 import {SetBid, SetScore} from '../players/player.actions';
@@ -62,8 +62,7 @@ const PointsCounter:React.FC<ScoreControlsProps> = ({
   const [changed, setChanged] = useState(false);
 
   const points = useSelector((state:State):number => state.points?.[playerId]?.[name] || 0);
-  const game = useSelector((state:State):number => state.game.round);
-  const gameRef = useRef(0);
+  const round = useSelector((state:State):number => state.game.round);
 
   const onButtonClick = (amount:number) => {
     onChange(points + amount);
@@ -72,12 +71,10 @@ const PointsCounter:React.FC<ScoreControlsProps> = ({
   };
 
   useEffect(() => {
-    if (gameRef.current !== game) {
-      gameRef.current = game;
-      setDelta(0);
-      setChanged(false);
-    }
-  }, [game]);
+    //Round changed, reset counters
+    setDelta(0);
+    setChanged(false);
+  }, [round]);
 
   return (
     <div className={'score-controls'}>
