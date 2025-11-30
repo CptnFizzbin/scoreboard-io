@@ -1,0 +1,33 @@
+# Workspace
+workspace.xml
+tasks.xml
+
+# VCS
+vcs.xml
+
+# Shelf
+shelf/
+
+# Local history
+history/
+
+# Generated files
+dictionaries/
+inspectionProfiles/
+
+# User-specific settings
+encodings.xml
+misc.xml
+modules.xml
+projectSettingsUpdater.xml
+runConfigurations.xml
+uiDesigner.xml
+usage.statistics.xml
+
+# Build directories
+out/
+artifacts/
+
+# Plugins
+plugins/
+
