@@ -1,6 +1,9 @@
 import { beforeEach, describe, expect, it } from "vitest"
 import type { Player } from "@/lib/games/wizard/players/player"
-import { addPlayer, removePlayer } from "@/lib/games/wizard/players/players.actions"
+import {
+  addPlayer,
+  removePlayer,
+} from "@/lib/games/wizard/players/players.actions"
 import { startNewRound } from "@/lib/games/wizard/round/round.actions"
 import { setTricks } from "@/lib/games/wizard/tricks/tricks.actions"
 import { tricksReducer } from "@/lib/games/wizard/tricks/tricks.reducer"

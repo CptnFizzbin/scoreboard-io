@@ -1,5 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit"
-import { addPlayer, removePlayer } from "@/lib/games/wizard/players/players.actions"
+import {
+  addPlayer,
+  removePlayer,
+} from "@/lib/games/wizard/players/players.actions"
 import { startNewRound } from "@/lib/games/wizard/round/round.actions"
 import { setTricks } from "@/lib/games/wizard/tricks/tricks.actions"
 

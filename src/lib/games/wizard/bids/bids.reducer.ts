@@ -1,6 +1,9 @@
 import { createReducer } from "@reduxjs/toolkit"
 import { setBid } from "@/lib/games/wizard/bids/bids.actions"
-import { addPlayer, removePlayer } from "@/lib/games/wizard/players/players.actions"
+import {
+  addPlayer,
+  removePlayer,
+} from "@/lib/games/wizard/players/players.actions"
 import { startNewRound } from "@/lib/games/wizard/round/round.actions"
 
 export const bidsReducer = createReducer(

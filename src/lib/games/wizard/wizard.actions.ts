@@ -1,7 +1,10 @@
 import { createThunkFactory } from "@/integrations/redux/create-thunk-factory"
 import { startNewRound } from "@/lib/games/wizard/round/round.actions"
 import { setScore } from "@/lib/games/wizard/score/score.actions"
-import type { WizardDispatch, WizardState } from "@/lib/games/wizard/wizard-store"
+import type {
+  WizardDispatch,
+  WizardState,
+} from "@/lib/games/wizard/wizard-store"
 
 const createThunk = createThunkFactory<WizardDispatch, WizardState>()
 

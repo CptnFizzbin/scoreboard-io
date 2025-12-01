@@ -1,5 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit"
-import { addPlayer, removePlayer } from "@/lib/games/wizard/players/players.actions"
+import {
+  addPlayer,
+  removePlayer,
+} from "@/lib/games/wizard/players/players.actions"
 import { setScore } from "@/lib/games/wizard/score/score.actions"
 
 export const scoreReducer = createReducer(

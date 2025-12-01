@@ -2,7 +2,10 @@ import type { FC } from "react"
 import { Counter } from "@/components/ui/counters/Counter"
 import { setBid } from "@/lib/games/wizard/bids/bids.actions"
 import { selectPlayerStats } from "@/lib/games/wizard/players/player.selectors"
-import { useWizardDispatch, useWizardSelector } from "@/lib/games/wizard/wizard-store"
+import {
+  useWizardDispatch,
+  useWizardSelector,
+} from "@/lib/games/wizard/wizard-store"
 
 interface BidCounterProps {
   playerId: string

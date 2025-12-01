@@ -2,7 +2,10 @@ import { beforeEach, describe, expect, it } from "vitest"
 import { setBid } from "@/lib/games/wizard/bids/bids.actions"
 import { bidsReducer } from "@/lib/games/wizard/bids/bids.reducer"
 import type { Player } from "@/lib/games/wizard/players/player"
-import { addPlayer, removePlayer } from "@/lib/games/wizard/players/players.actions"
+import {
+  addPlayer,
+  removePlayer,
+} from "@/lib/games/wizard/players/players.actions"
 import { startNewRound } from "@/lib/games/wizard/round/round.actions"
 
 describe("bidsReducer", () => {

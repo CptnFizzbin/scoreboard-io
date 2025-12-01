@@ -5,7 +5,10 @@ import { selectPlayerStats } from "@/lib/games/wizard/players/player.selectors"
 import { setPlayers } from "@/lib/games/wizard/players/players.actions"
 import { setTricks } from "@/lib/games/wizard/tricks/tricks.actions"
 import { endRound } from "@/lib/games/wizard/wizard.actions"
-import { createWizardStore, type WizardStore } from "@/lib/games/wizard/wizard-store"
+import {
+  createWizardStore,
+  type WizardStore,
+} from "@/lib/games/wizard/wizard-store"
 
 describe("Wizard Store", () => {
   let store: WizardStore

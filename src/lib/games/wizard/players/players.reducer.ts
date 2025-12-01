@@ -1,6 +1,10 @@
 import { createReducer } from "@reduxjs/toolkit"
 import type { Player } from "@/lib/games/wizard/players/player.ts"
-import { addPlayer, removePlayer, setPlayers } from "@/lib/games/wizard/players/players.actions.ts"
+import {
+  addPlayer,
+  removePlayer,
+  setPlayers,
+} from "@/lib/games/wizard/players/players.actions.ts"
 
 export const playersReducer = createReducer(
   {} as Record<string, Player>,
