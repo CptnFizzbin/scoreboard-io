@@ -8,7 +8,7 @@ export const PlayerList: FC = () => {
   const playerIds = useWizardSelector(selectPlayerIds)
 
   return (
-    <Stack gap={2} padding={2}>
+    <Stack gap={2}>
       {Array.from(playerIds).map((playerId) => (
         <PlayerCard key={playerId} playerId={playerId} />
       ))}
