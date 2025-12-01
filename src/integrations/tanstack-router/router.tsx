@@ -1,6 +1,6 @@
 import { createRouter } from "@tanstack/react-router"
 import TanstackQuery from "@/integrations/tanstack-query" // Create a new router instance
-import { routeTree } from "@/routeTree.gen.ts"
+import { routeTree } from "./route-tree.gen.ts"
 
 export const router = createRouter({
   routeTree,

@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@mui/material"
+import { ThemeProvider } from "@mui/material/styles"
 import type { FC, PropsWithChildren } from "react"
 import Mui from "@/integrations/mui"
 

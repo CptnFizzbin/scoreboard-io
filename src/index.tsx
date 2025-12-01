@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client"
 import Mui from "@/integrations/mui"
 import TanstackQuery from "@/integrations/tanstack-query"
 import TanstackRouter from "@/integrations/tanstack-router"
+import reportWebVitals from "./report-web-vitals.ts"
 
-import reportWebVitals from "./reportWebVitals.ts"
 import "./index.scss"
 
 // Render the app

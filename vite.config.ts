@@ -1,9 +1,10 @@
-import { defineConfig } from 'vite';
-import { devtools } from '@tanstack/devtools-vite';
-import viteReact from '@vitejs/plugin-react';
-import checker from 'vite-plugin-checker';
-import { tanstackRouter } from '@tanstack/router-plugin/vite';
-import { fileURLToPath, URL } from 'node:url';
+import { defineConfig } from "vite"
+import { devtools } from "@tanstack/devtools-vite"
+import viteReact from "@vitejs/plugin-react"
+import checker from "vite-plugin-checker"
+import { tanstackRouter } from "@tanstack/router-plugin/vite"
+import { fileURLToPath, URL } from "node:url"
+import basicSsl from "@vitejs/plugin-basic-ssl"
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,6 +13,7 @@ export default defineConfig({
     tanstackRouter({
       target: 'react',
       autoCodeSplitting: true,
+      generatedRouteTree: fileURLToPath(new URL('./src/integrations/tanstack-router/route-tree.gen.ts', import.meta.url))
     }),
     viteReact({
       babel: {
@@ -22,10 +24,16 @@ export default defineConfig({
       typescript: true,
       biome: true,
     }),
+    basicSsl({
+      certDir: fileURLToPath(new URL('./.certs', import.meta.url)),
+    }),
   ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  test: {
+    setupFiles: fileURLToPath(new URL('./vitest.setup.ts', import.meta.url)),
+  }
 });

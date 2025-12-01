@@ -11,7 +11,7 @@
       "**/src/**/*",
       "**/index.html",
       "**/vite.config.js",
-      "!**/src/routeTree.gen.ts"
+      "!**/*.gen.ts"
     ]
   },
   "formatter": {
