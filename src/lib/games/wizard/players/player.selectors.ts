@@ -5,7 +5,7 @@ import { selectPlayerScore } from "@/lib/games/wizard/score/score.selectors"
 import { selectTricks } from "@/lib/games/wizard/tricks/tricks.selectors"
 import type { WizardState } from "../wizard-store"
 
-const selectAllPlayers = (state: WizardState) => state.players
+export const selectAllPlayers = (state: WizardState) => state.players
 
 export const selectPlayerIds = createSelector([selectAllPlayers], (players) =>
   Object.keys(players),

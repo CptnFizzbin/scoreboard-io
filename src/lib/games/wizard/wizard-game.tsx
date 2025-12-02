@@ -3,6 +3,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow"
 import { Box, Button, Stack, Typography } from "@mui/material"
 import { type FC, useState } from "react"
 import { selectTotalBids } from "@/lib/games/wizard/bids/bids.selectors"
+import { LeaderboardButton } from "@/lib/games/wizard/leaderboard/leaderboard-button"
 import { PlayerList } from "@/lib/games/wizard/players/player-list"
 import { PlayerManagementDialog } from "@/lib/games/wizard/players/player-management-dialog"
 import { EndRoundButton } from "@/lib/games/wizard/round/end-round-button"
@@ -37,6 +38,9 @@ const WizardGameContent: FC = () => {
           >
             New Game
           </Button>
+
+          <LeaderboardButton />
+
           <Button
             variant="outlined"
             startIcon={<GroupIcon />}
