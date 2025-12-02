@@ -57,7 +57,7 @@ export const PlayerManagementDialog: FC<PlayerManagementDialogProps> = ({
   }
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+    <Dialog open={open} maxWidth="sm" fullWidth>
       <DialogTitle>Manage Players</DialogTitle>
       <Divider />
       <DialogContent>

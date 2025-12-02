@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography"
 import type { FC } from "react"
 import { BidCounter } from "@/lib/games/wizard/bids/bid-counter"
 import { selectPlayerStats } from "@/lib/games/wizard/players/player.selectors"
+import { Placement } from "@/lib/games/wizard/score/placement"
 import { ScoreCounter } from "@/lib/games/wizard/score/score-counter"
 import { TricksCounter } from "@/lib/games/wizard/tricks/tricks-counter"
 import { useWizardSelector } from "@/lib/games/wizard/wizard-store"
@@ -26,14 +27,18 @@ export const PlayerCard: FC<PlayerCardProps> = ({ playerId }) => {
           padding={1}
           paddingBottom={0}
         >
-          <Box>
-            <Typography variant="body2" color="textSecondary">
-              Player
-            </Typography>
-            <Typography variant="h6" fontWeight="bold">
-              {stats.player.name}
-            </Typography>
-          </Box>
+          <Stack gap={2} direction={"row"}>
+            <Placement playerId={playerId} />
+
+            <Box>
+              <Typography variant="body2" color="textSecondary">
+                Player
+              </Typography>
+              <Typography variant="h6" fontWeight="bold">
+                {stats.player.name}
+              </Typography>
+            </Box>
+          </Stack>
 
           <ScoreCounter playerId={playerId} />
         </Stack>

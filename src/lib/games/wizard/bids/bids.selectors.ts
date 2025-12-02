@@ -7,5 +7,5 @@ export const selectBid = (playerId: string) => {
 }
 
 export const selectTotalBids = (state: WizardState) => {
-  return Object.values(state.bids).reduce((sum, bid) => sum + bid)
+  return Object.values(state.bids).reduce((sum, bid) => sum + bid, 0)
 }

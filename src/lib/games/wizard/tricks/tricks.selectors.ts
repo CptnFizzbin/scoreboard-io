@@ -5,3 +5,7 @@ export const selectTricks = (playerId: string) => {
     return state.tricks[playerId] || 0
   }
 }
+
+export const selectTotalTricks = (state: WizardState) => {
+  return Object.values(state.tricks).reduce((sum, tricks) => sum + tricks, 0)
+}

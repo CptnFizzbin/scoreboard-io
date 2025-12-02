@@ -1,7 +1,7 @@
 import { createSelector } from "reselect"
 import { selectBid } from "@/lib/games/wizard/bids/bids.selectors"
 import type { Player } from "@/lib/games/wizard/players/player"
-import { selectScore } from "@/lib/games/wizard/score/score.selectors"
+import { selectPlayerScore } from "@/lib/games/wizard/score/score.selectors"
 import { selectTricks } from "@/lib/games/wizard/tricks/tricks.selectors"
 import type { WizardState } from "../wizard-store"
 
@@ -23,7 +23,7 @@ export const selectPlayerStats = (playerId: string) => {
   return createSelector(
     [
       selectPlayer(playerId),
-      selectScore(playerId),
+      selectPlayerScore(playerId),
       selectBid(playerId),
       selectTricks(playerId),
     ],

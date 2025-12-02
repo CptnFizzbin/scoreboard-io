@@ -5,8 +5,9 @@ import { type FC, useState } from "react"
 import { selectTotalBids } from "@/lib/games/wizard/bids/bids.selectors"
 import { PlayerList } from "@/lib/games/wizard/players/player-list"
 import { PlayerManagementDialog } from "@/lib/games/wizard/players/player-management-dialog"
+import { EndRoundButton } from "@/lib/games/wizard/round/end-round-button"
 import { selectCurrentRound } from "@/lib/games/wizard/round/round.selectors"
-import { endRound, startNewGame } from "@/lib/games/wizard/wizard.actions"
+import { startNewGame } from "@/lib/games/wizard/wizard.actions"
 import {
   useWizardDispatch,
   useWizardSelector,
@@ -48,9 +49,7 @@ const WizardGameContent: FC = () => {
 
       <PlayerList />
 
-      <Button variant="outlined" onClick={() => dispatch(endRound())}>
-        End Round
-      </Button>
+      <EndRoundButton />
 
       <PlayerManagementDialog
         open={dialogOpen}
