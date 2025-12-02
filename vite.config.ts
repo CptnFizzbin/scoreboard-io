@@ -28,12 +28,34 @@ export default defineConfig({
       certDir: fileURLToPath(new URL('./.certs', import.meta.url)),
     }),
   ],
+
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+
+  build: {
+    sourcemap: true,
+    chunkSizeWarningLimit: 600, //KB
+
+    rollupOptions: {
+      output: {
+        manualChunks: (url) => {
+          switch (true) {
+            case url.includes('/@fortawesome'):
+              return 'vendor-fortawesome'
+            case url.includes('node_modules'):
+              return 'vendor'
+            default:
+              return 'main'
+          }
+        }
+      }
+    }
+  },
+
   test: {
     setupFiles: fileURLToPath(new URL('./vitest.setup.ts', import.meta.url)),
-  }
+  },
 });
