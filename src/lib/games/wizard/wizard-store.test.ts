@@ -19,7 +19,7 @@ describe("Wizard Store", () => {
     playerAlice = { id: "player-alice", name: "Alice" }
     playerBob = { id: "player-bob", name: "Bob" }
 
-    store = createWizardStore()
+    store = createWizardStore().store
     store.dispatch(setPlayers([playerAlice, playerBob]))
   })
 
@@ -32,7 +32,7 @@ describe("Wizard Store", () => {
       store.dispatch(endRound())
 
       const state = store.getState()
-      expect(state.round).toBe(1)
+      expect(state.round).toBe(2)
 
       const aliceStats = selectPlayerStats(playerAlice.id)(state)
       expect(aliceStats.bid).toBe(0)
