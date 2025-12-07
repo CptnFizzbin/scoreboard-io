@@ -40,7 +40,7 @@ export const LeaderboardDialog: FC<LeaderboardDialogProps> = ({
                 direction="row"
                 gap={2}
                 alignItems={"center"}
-                sx={{ minWidth: 250 }}
+                sx={{ minWidth: "min(250px, 50vw)" }}
               >
                 <Placement playerId={playerId} />
                 <Typography>{players[playerId].name}</Typography>
