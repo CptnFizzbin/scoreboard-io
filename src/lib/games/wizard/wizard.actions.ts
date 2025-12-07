@@ -1,32 +1,20 @@
 import { createAction } from "@reduxjs/toolkit"
-import { createThunkFactory } from "@/integrations/redux/create-thunk-factory"
-import { startNewRound } from "@/lib/games/wizard/round/round.actions"
-import { setScore } from "@/lib/games/wizard/score/score.actions"
-import type {
-  WizardDispatch,
-  WizardState,
-} from "@/lib/games/wizard/wizard-store"
+import type { UUID } from "@/lib/games/wizard/wizard.types"
 
-const createThunk = createThunkFactory<WizardDispatch, WizardState>()
+export const setPlayers =
+  createAction<{ id: UUID; name: string }[]>("players/setPlayers")
+export const addPlayer = createAction<{ id: UUID; name: string }>(
+  "players/addPlayer",
+)
+export const removePlayer = createAction<{ id: UUID }>("players/removePlayer")
 
 export const startNewGame = createAction("game/wizard/newGame")
 
-export const endRound = createThunk((dispatch, getState) => {
-  const { players, bids, tricks, score } = getState()
+export const setBid = createAction<{ playerId: UUID; bid: number }>(
+  "game/wizard/setBid",
+)
+export const setTricks = createAction<{ playerId: UUID; tricks: number }>(
+  "game/wizard/setTricks",
+)
 
-  for (const player of Object.values(players)) {
-    const playerBid = bids[player.id] || 0
-    const playerTricks = tricks[player.id] || 0
-    let playerScore = score[player.id] || 0
-
-    if (playerBid === playerTricks) {
-      playerScore += 20 + playerBid * 10
-    } else {
-      playerScore -= Math.abs(playerBid - playerTricks) * 10
-    }
-
-    dispatch(setScore(player.id, playerScore))
-  }
-
-  dispatch(startNewRound())
-})
+export const endRound = createAction("game/wizard/endRound")

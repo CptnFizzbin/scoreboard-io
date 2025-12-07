@@ -1,9 +1,11 @@
 import { Dialog, DialogActions, DialogContent, Typography } from "@mui/material"
 import Button from "@mui/material/Button"
 import { type FC, useState } from "react"
-import { selectCurrentRound } from "@/lib/games/wizard/round/round.selectors"
-import { selectTotalTricks } from "@/lib/games/wizard/tricks/tricks.selectors"
 import { endRound } from "@/lib/games/wizard/wizard.actions"
+import {
+  selectCurrentRound,
+  selectTotalTricks,
+} from "@/lib/games/wizard/wizard.selectors"
 import {
   useWizardDispatch,
   useWizardSelector,

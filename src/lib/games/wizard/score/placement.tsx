@@ -3,12 +3,13 @@ import { useTheme } from "@mui/material"
 import Stack from "@mui/material/Stack"
 import type { FC } from "react"
 import { FontAwesomeSvgIcon } from "@/integrations/font-awesome/font-awesome-svg-icon"
-import { selectPlayerStanding } from "@/lib/games/wizard/score/score.selectors"
+import { selectPlayerStanding } from "@/lib/games/wizard/wizard.selectors"
+import type { UUID } from "@/lib/games/wizard/wizard.types"
 import { useWizardSelector } from "@/lib/games/wizard/wizard-store"
 import { toOrdinal } from "@/lib/numberUtils"
 
 interface PlacementProps {
-  playerId: string
+  playerId: UUID
   podiumOnly?: boolean
 }
 

@@ -13,14 +13,12 @@ import Divider from "@mui/material/Divider"
 import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
 import { type FC, type KeyboardEvent, useState } from "react"
+import { addPlayer, removePlayer } from "@/lib/games/wizard/wizard.actions"
 import {
   selectPlayer,
   selectPlayerIds,
-} from "@/lib/games/wizard/players/player.selectors"
-import {
-  addPlayer,
-  removePlayer,
-} from "@/lib/games/wizard/players/players.actions"
+} from "@/lib/games/wizard/wizard.selectors"
+import type { UUID } from "@/lib/games/wizard/wizard.types"
 import {
   useWizardDispatch,
   useWizardSelector,
@@ -41,12 +39,12 @@ export const PlayerManagementDialog: FC<PlayerManagementDialogProps> = ({
 
   const onAddPlayer = () => {
     if (newPlayerName.trim()) {
-      dispatch(addPlayer({ name: newPlayerName }))
+      dispatch(addPlayer({ id: crypto.randomUUID(), name: newPlayerName }))
       setNewPlayerName("")
     }
   }
 
-  const onRemovePlayer = (playerId: string) => {
+  const onRemovePlayer = (playerId: UUID) => {
     dispatch(removePlayer({ id: playerId }))
   }
 
@@ -110,8 +108,8 @@ export const PlayerManagementDialog: FC<PlayerManagementDialogProps> = ({
 }
 
 interface PlayerRowProps {
-  playerId: string
-  onRemove: (playerId: string) => void
+  playerId: UUID
+  onRemove: (playerId: UUID) => void
 }
 
 const PlayerRow: FC<PlayerRowProps> = ({ playerId, onRemove }) => {

@@ -5,18 +5,21 @@ import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import type { FC } from "react"
 import { BidCounter } from "@/lib/games/wizard/bids/bid-counter"
-import { selectPlayerStats } from "@/lib/games/wizard/players/player.selectors"
 import { Placement } from "@/lib/games/wizard/score/placement"
 import { ScoreCounter } from "@/lib/games/wizard/score/score-counter"
 import { TricksCounter } from "@/lib/games/wizard/tricks/tricks-counter"
+import { selectDealer, selectPlayer } from "@/lib/games/wizard/wizard.selectors"
+import type { UUID } from "@/lib/games/wizard/wizard.types"
 import { useWizardSelector } from "@/lib/games/wizard/wizard-store"
+import { Chip } from "@mui/material"
 
 interface PlayerCardProps {
-  playerId: string
+  playerId: UUID
 }
 
 export const PlayerCard: FC<PlayerCardProps> = ({ playerId }) => {
-  const stats = useWizardSelector(selectPlayerStats(playerId))
+  const player = useWizardSelector(selectPlayer(playerId))
+  const isDealer = useWizardSelector(selectDealer) === player.id
 
   return (
     <Paper>
@@ -31,11 +34,17 @@ export const PlayerCard: FC<PlayerCardProps> = ({ playerId }) => {
             <Placement playerId={playerId} />
 
             <Box>
-              <Typography variant="body2" color="textSecondary">
-                Player
-              </Typography>
+              <Stack direction={"row"} gap={1}>
+                <Typography variant="body2" color="textSecondary">
+                  Player
+                </Typography>
+
+                {isDealer && (
+                  <Chip label={"Dealer"} size={"small"} color={"info"} />
+                )}
+              </Stack>
               <Typography variant="h6" fontWeight="bold">
-                {stats.player.name}
+                {player.name}
               </Typography>
             </Box>
           </Stack>

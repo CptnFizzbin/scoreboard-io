@@ -3,12 +3,11 @@ import Divider from "@mui/material/Divider"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import type { FC } from "react"
-import { selectAllPlayers } from "@/lib/games/wizard/players/player.selectors"
 import { Placement } from "@/lib/games/wizard/score/placement"
 import {
-  selectAllScores,
   selectLeaderboard,
-} from "@/lib/games/wizard/score/score.selectors"
+  selectPlayers,
+} from "@/lib/games/wizard/wizard.selectors"
 import { useWizardSelector } from "@/lib/games/wizard/wizard-store"
 
 interface LeaderboardDialogProps {
@@ -20,8 +19,7 @@ export const LeaderboardDialog: FC<LeaderboardDialogProps> = ({
   open,
   onClose,
 }) => {
-  const players = useWizardSelector(selectAllPlayers)
-  const scores = useWizardSelector(selectAllScores)
+  const players = useWizardSelector(selectPlayers)
   const leaderboard = useWizardSelector(selectLeaderboard)
 
   return (
@@ -30,7 +28,7 @@ export const LeaderboardDialog: FC<LeaderboardDialogProps> = ({
       <Divider />
       <DialogContent>
         <Stack gap={2}>
-          {leaderboard.map((playerId) => (
+          {leaderboard.map(({ playerId, score }) => (
             <Stack
               direction={"row"}
               key={playerId}
@@ -48,7 +46,7 @@ export const LeaderboardDialog: FC<LeaderboardDialogProps> = ({
                 <Typography>{players[playerId].name}</Typography>
               </Stack>
 
-              <Typography>{scores[playerId] || 0}</Typography>
+              <Typography>{score}</Typography>
             </Stack>
           ))}
         </Stack>

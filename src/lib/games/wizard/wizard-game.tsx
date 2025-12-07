@@ -2,13 +2,15 @@ import { Group as GroupIcon } from "@mui/icons-material"
 import PlayArrowIcon from "@mui/icons-material/PlayArrow"
 import { Box, Button, Stack, Typography } from "@mui/material"
 import { type FC, useState } from "react"
-import { selectTotalBids } from "@/lib/games/wizard/bids/bids.selectors"
 import { LeaderboardButton } from "@/lib/games/wizard/leaderboard/leaderboard-button"
 import { PlayerList } from "@/lib/games/wizard/players/player-list"
 import { PlayerManagementDialog } from "@/lib/games/wizard/players/player-management-dialog"
 import { EndRoundButton } from "@/lib/games/wizard/round/end-round-button"
-import { selectCurrentRound } from "@/lib/games/wizard/round/round.selectors"
 import { startNewGame } from "@/lib/games/wizard/wizard.actions"
+import {
+  selectCurrentRound,
+  selectTotalBids,
+} from "@/lib/games/wizard/wizard.selectors"
 import {
   useWizardDispatch,
   useWizardSelector,
