@@ -1,8 +1,8 @@
 import Stack from "@mui/material/Stack"
 import type { FC } from "react"
-import { PlayerCard } from "@/lib/games/wizard/players/player-card"
-import { selectPlayerIds } from "@/lib/games/wizard/wizard.selectors"
-import { useWizardSelector } from "@/lib/games/wizard/wizard-store"
+import { PlayerCard } from "@/games/wizard/players/player-card"
+import { selectPlayerIds } from "@/games/wizard/wizard.selectors"
+import { useWizardSelector } from "@/games/wizard/wizard-store"
 
 export const PlayerList: FC = () => {
   const playerIds = useWizardSelector(selectPlayerIds)

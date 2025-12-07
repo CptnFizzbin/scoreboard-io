@@ -2,20 +2,20 @@ import { Group as GroupIcon } from "@mui/icons-material"
 import PlayArrowIcon from "@mui/icons-material/PlayArrow"
 import { Box, Button, Stack, Typography } from "@mui/material"
 import { type FC, useState } from "react"
-import { LeaderboardButton } from "@/lib/games/wizard/leaderboard/leaderboard-button"
-import { PlayerList } from "@/lib/games/wizard/players/player-list"
-import { PlayerManagementDialog } from "@/lib/games/wizard/players/player-management-dialog"
-import { EndRoundButton } from "@/lib/games/wizard/round/end-round-button"
-import { startNewGame } from "@/lib/games/wizard/wizard.actions"
+import { LeaderboardButton } from "@/games/wizard/leaderboard/leaderboard-button"
+import { PlayerList } from "@/games/wizard/players/player-list"
+import { PlayerManagementDialog } from "@/games/wizard/players/player-management-dialog"
+import { EndRoundButton } from "@/games/wizard/round/end-round-button"
+import { startNewGame } from "@/games/wizard/wizard.actions"
 import {
   selectCurrentRound,
   selectTotalBids,
-} from "@/lib/games/wizard/wizard.selectors"
+} from "@/games/wizard/wizard.selectors"
 import {
   useWizardDispatch,
   useWizardSelector,
-} from "@/lib/games/wizard/wizard-store"
-import { WizardStoreProvider } from "@/lib/games/wizard/wizard-store-provider"
+} from "@/games/wizard/wizard-store"
+import { WizardStoreProvider } from "@/games/wizard/wizard-store-provider"
 
 const WizardGameContent: FC = () => {
   const [dialogOpen, setDialogOpen] = useState(false)

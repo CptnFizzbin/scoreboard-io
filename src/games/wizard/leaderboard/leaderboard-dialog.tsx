@@ -3,12 +3,12 @@ import Divider from "@mui/material/Divider"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import type { FC } from "react"
-import { Placement } from "@/lib/games/wizard/score/placement"
+import { Placement } from "@/games/wizard/score/placement"
 import {
   selectLeaderboard,
   selectPlayers,
-} from "@/lib/games/wizard/wizard.selectors"
-import { useWizardSelector } from "@/lib/games/wizard/wizard-store"
+} from "@/games/wizard/wizard.selectors"
+import { useWizardSelector } from "@/games/wizard/wizard-store"
 
 interface LeaderboardDialogProps {
   open: boolean

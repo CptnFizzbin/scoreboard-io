@@ -2,8 +2,8 @@ import { createSelector } from "reselect"
 import {
   createLeaderboard,
   type Leaderboard,
-} from "@/lib/games/wizard/leaderboard/leaderboard"
-import type { UUID, WizardState } from "@/lib/games/wizard/wizard.types"
+} from "@/games/wizard/leaderboard/leaderboard"
+import type { UUID, WizardState } from "@/games/wizard/wizard.types"
 
 export const selectCurrentRound = (state: WizardState) => state.round
 

@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit"
-import type { UUID } from "@/lib/games/wizard/wizard.types"
+import type { UUID } from "@/games/wizard/wizard.types"
 
 export const setPlayers =
   createAction<{ id: UUID; name: string }[]>("players/setPlayers")

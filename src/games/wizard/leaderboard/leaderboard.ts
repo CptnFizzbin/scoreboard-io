@@ -1,5 +1,5 @@
 import { sort } from "fast-sort"
-import type { UUID } from "@/lib/games/wizard/wizard.types"
+import type { UUID } from "@/games/wizard/wizard.types"
 
 export interface LeaderboardRow {
   playerId: UUID

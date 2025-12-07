@@ -1,11 +1,11 @@
 import { createReducer } from "@reduxjs/toolkit"
-import * as actions from "@/lib/games/wizard/wizard.actions"
+import * as actions from "@/games/wizard/wizard.actions"
 import type {
   Player,
   RoundHistory,
   UUID,
   WizardState,
-} from "@/lib/games/wizard/wizard.types"
+} from "@/games/wizard/wizard.types"
 
 const defaultState: WizardState = {
   round: 1,
@@ -85,7 +85,7 @@ export const wizardReducer = createReducer(defaultState, ({ addCase }) => {
   })
 })
 
-function getNextDealer (state: WizardState): UUID {
+function getNextDealer(state: WizardState): UUID {
   const playerIds = Object.values(state.players).map((player) => player.id)
 
   if (state.dealer === null) {
@@ -100,7 +100,7 @@ function getNextDealer (state: WizardState): UUID {
   return playerIds[nextDealerIndex]
 }
 
-function calcPlayerScore (player: Player): number {
+function calcPlayerScore(player: Player): number {
   const { bid, tricks } = player
   let score = player.score
 

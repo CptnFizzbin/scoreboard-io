@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it } from "vitest"
-import * as actions from "@/lib/games/wizard/wizard.actions"
-import { wizardReducer } from "@/lib/games/wizard/wizard.reducer"
-import { selectHistoryForRound } from "@/lib/games/wizard/wizard.selectors"
+import * as actions from "@/games/wizard/wizard.actions"
+import { wizardReducer } from "@/games/wizard/wizard.reducer"
+import { selectHistoryForRound } from "@/games/wizard/wizard.selectors"
 import type {
   RoundHistory,
   UUID,
   WizardState,
-} from "@/lib/games/wizard/wizard.types"
+} from "@/games/wizard/wizard.types"
 
 describe("wizardReducer", () => {
   let state: WizardState

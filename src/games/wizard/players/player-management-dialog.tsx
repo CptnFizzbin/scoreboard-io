@@ -13,16 +13,13 @@ import Divider from "@mui/material/Divider"
 import Paper from "@mui/material/Paper"
 import Typography from "@mui/material/Typography"
 import { type FC, type KeyboardEvent, useState } from "react"
-import { addPlayer, removePlayer } from "@/lib/games/wizard/wizard.actions"
-import {
-  selectPlayer,
-  selectPlayerIds,
-} from "@/lib/games/wizard/wizard.selectors"
-import type { UUID } from "@/lib/games/wizard/wizard.types"
+import { addPlayer, removePlayer } from "@/games/wizard/wizard.actions"
+import { selectPlayer, selectPlayerIds } from "@/games/wizard/wizard.selectors"
+import type { UUID } from "@/games/wizard/wizard.types"
 import {
   useWizardDispatch,
   useWizardSelector,
-} from "@/lib/games/wizard/wizard-store"
+} from "@/games/wizard/wizard-store"
 
 interface PlayerManagementDialogProps {
   open: boolean

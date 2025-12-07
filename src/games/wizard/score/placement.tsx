@@ -2,10 +2,10 @@ import { faCrown } from "@fortawesome/free-solid-svg-icons/faCrown"
 import { useTheme } from "@mui/material"
 import Stack from "@mui/material/Stack"
 import type { FC } from "react"
+import { selectPlayerStanding } from "@/games/wizard/wizard.selectors"
+import type { UUID } from "@/games/wizard/wizard.types"
+import { useWizardSelector } from "@/games/wizard/wizard-store"
 import { FontAwesomeSvgIcon } from "@/integrations/font-awesome/font-awesome-svg-icon"
-import { selectPlayerStanding } from "@/lib/games/wizard/wizard.selectors"
-import type { UUID } from "@/lib/games/wizard/wizard.types"
-import { useWizardSelector } from "@/lib/games/wizard/wizard-store"
 import { toOrdinal } from "@/lib/numberUtils"
 
 interface PlacementProps {

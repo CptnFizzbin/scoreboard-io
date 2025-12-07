@@ -1,12 +1,12 @@
 import type { FC } from "react"
 import { Counter } from "@/components/ui/counters/Counter"
-import { setTricks } from "@/lib/games/wizard/wizard.actions"
-import { selectPlayer } from "@/lib/games/wizard/wizard.selectors"
-import type { UUID } from "@/lib/games/wizard/wizard.types"
+import { setTricks } from "@/games/wizard/wizard.actions"
+import { selectPlayer } from "@/games/wizard/wizard.selectors"
+import type { UUID } from "@/games/wizard/wizard.types"
 import {
   useWizardDispatch,
   useWizardSelector,
-} from "@/lib/games/wizard/wizard-store"
+} from "@/games/wizard/wizard-store"
 
 interface TricksCounterProps {
   playerId: UUID

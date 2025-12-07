@@ -5,13 +5,13 @@ import {
   setPlayers,
   setTricks,
   startNewGame,
-} from "@/lib/games/wizard/wizard.actions"
-import { selectPlayer } from "@/lib/games/wizard/wizard.selectors"
-import type { UUID } from "@/lib/games/wizard/wizard.types"
+} from "@/games/wizard/wizard.actions"
+import { selectPlayer } from "@/games/wizard/wizard.selectors"
+import type { UUID } from "@/games/wizard/wizard.types"
 import {
   createWizardStore,
   type WizardStore,
-} from "@/lib/games/wizard/wizard-store"
+} from "@/games/wizard/wizard-store"
 
 describe("Wizard Store", () => {
   let store: WizardStore

@@ -1,15 +1,15 @@
 import { Dialog, DialogActions, DialogContent, Typography } from "@mui/material"
 import Button from "@mui/material/Button"
 import { type FC, useState } from "react"
-import { endRound } from "@/lib/games/wizard/wizard.actions"
+import { endRound } from "@/games/wizard/wizard.actions"
 import {
   selectCurrentRound,
   selectTotalTricks,
-} from "@/lib/games/wizard/wizard.selectors"
+} from "@/games/wizard/wizard.selectors"
 import {
   useWizardDispatch,
   useWizardSelector,
-} from "@/lib/games/wizard/wizard-store"
+} from "@/games/wizard/wizard-store"
 
 export const EndRoundButton: FC = () => {
   const dispatch = useWizardDispatch()

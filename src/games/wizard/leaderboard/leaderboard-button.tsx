@@ -1,7 +1,7 @@
 import { EmojiEvents as LeaderboardIcon } from "@mui/icons-material"
 import { Button } from "@mui/material"
 import { type FC, useState } from "react"
-import { LeaderboardDialog } from "@/lib/games/wizard/leaderboard/leaderboard-dialog"
+import { LeaderboardDialog } from "@/games/wizard/leaderboard/leaderboard-dialog"
 
 export const LeaderboardButton: FC = () => {
   const [leaderboardOpen, setLeaderboardOpen] = useState(false)

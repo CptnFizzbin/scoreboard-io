@@ -2,9 +2,9 @@ import { configureStore } from "@reduxjs/toolkit"
 import { useDispatch, useSelector } from "react-redux"
 import { persistReducer, persistStore } from "redux-persist"
 import storage from "redux-persist/lib/storage"
-import { wizardReducer } from "@/lib/games/wizard/wizard.reducer"
+import { wizardReducer } from "@/games/wizard/wizard.reducer"
 
-export function createWizardStore () {
+export function createWizardStore() {
   const persistedReducer = persistReducer(
     {
       key: "game.wizard",
