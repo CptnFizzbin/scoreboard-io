@@ -1,4 +1,3 @@
-import { Chip } from "@mui/material"
 import Box from "@mui/material/Box"
 import Divider from "@mui/material/Divider"
 import Paper from "@mui/material/Paper"
@@ -6,6 +5,7 @@ import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import type { FC } from "react"
 import { BidCounter } from "@/games/wizard/bids/bid-counter"
+import { DealerChip } from "@/games/wizard/players/dealer-chip"
 import { Placement } from "@/games/wizard/score/placement"
 import { ScoreCounter } from "@/games/wizard/score/score-counter"
 import { TricksCounter } from "@/games/wizard/tricks/tricks-counter"
@@ -39,9 +39,7 @@ export const PlayerCard: FC<PlayerCardProps> = ({ playerId }) => {
                   Player
                 </Typography>
 
-                {isDealer && (
-                  <Chip label={"Dealer"} size={"small"} color={"info"} />
-                )}
+                {isDealer && <DealerChip />}
               </Stack>
               <Typography variant="h6" fontWeight="bold">
                 {player.name}

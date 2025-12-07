@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './../../routes/__root'
 import { Route as IndexRouteImport } from './../../routes/index'
 import { Route as GamesWizardRouteImport } from './../../routes/games/wizard'
+import { Route as GamesWizardIndexRouteImport } from './../../routes/games/wizard.index'
+import { Route as GamesWizardPlayersRouteImport } from './../../routes/games/wizard.players'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +24,51 @@ const GamesWizardRoute = GamesWizardRouteImport.update({
   path: '/games/wizard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GamesWizardIndexRoute = GamesWizardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => GamesWizardRoute,
+} as any)
+const GamesWizardPlayersRoute = GamesWizardPlayersRouteImport.update({
+  id: '/players',
+  path: '/players',
+  getParentRoute: () => GamesWizardRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/games/wizard': typeof GamesWizardRoute
+  '/games/wizard': typeof GamesWizardRouteWithChildren
+  '/games/wizard/players': typeof GamesWizardPlayersRoute
+  '/games/wizard/': typeof GamesWizardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/games/wizard': typeof GamesWizardRoute
+  '/games/wizard/players': typeof GamesWizardPlayersRoute
+  '/games/wizard': typeof GamesWizardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/games/wizard': typeof GamesWizardRoute
+  '/games/wizard': typeof GamesWizardRouteWithChildren
+  '/games/wizard/players': typeof GamesWizardPlayersRoute
+  '/games/wizard/': typeof GamesWizardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/games/wizard'
+  fullPaths: '/' | '/games/wizard' | '/games/wizard/players' | '/games/wizard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/games/wizard'
-  id: '__root__' | '/' | '/games/wizard'
+  to: '/' | '/games/wizard/players' | '/games/wizard'
+  id:
+    | '__root__'
+    | '/'
+    | '/games/wizard'
+    | '/games/wizard/players'
+    | '/games/wizard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  GamesWizardRoute: typeof GamesWizardRoute
+  GamesWizardRoute: typeof GamesWizardRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +87,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GamesWizardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/games/wizard/': {
+      id: '/games/wizard/'
+      path: '/'
+      fullPath: '/games/wizard/'
+      preLoaderRoute: typeof GamesWizardIndexRouteImport
+      parentRoute: typeof GamesWizardRoute
+    }
+    '/games/wizard/players': {
+      id: '/games/wizard/players'
+      path: '/players'
+      fullPath: '/games/wizard/players'
+      preLoaderRoute: typeof GamesWizardPlayersRouteImport
+      parentRoute: typeof GamesWizardRoute
+    }
   }
 }
 
+interface GamesWizardRouteChildren {
+  GamesWizardPlayersRoute: typeof GamesWizardPlayersRoute
+  GamesWizardIndexRoute: typeof GamesWizardIndexRoute
+}
+
+const GamesWizardRouteChildren: GamesWizardRouteChildren = {
+  GamesWizardPlayersRoute: GamesWizardPlayersRoute,
+  GamesWizardIndexRoute: GamesWizardIndexRoute,
+}
+
+const GamesWizardRouteWithChildren = GamesWizardRoute._addFileChildren(
+  GamesWizardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  GamesWizardRoute: GamesWizardRoute,
+  GamesWizardRoute: GamesWizardRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

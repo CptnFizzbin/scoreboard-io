@@ -29,6 +29,10 @@ export const wizardReducer = createReducer(defaultState, ({ addCase }) => {
     )
   })
 
+  addCase(actions.setDealer, (state, { payload }) => {
+    state.dealer = payload.playerId
+  })
+
   addCase(actions.addPlayer, (state, { payload }) => {
     state.players[payload.id] = {
       id: payload.id,
@@ -37,9 +41,18 @@ export const wizardReducer = createReducer(defaultState, ({ addCase }) => {
       tricks: 0,
       bid: 0,
     }
+
+    const dealer = state.dealer && state.players[state.dealer]
+    if (!dealer) {
+      state.dealer = getNextDealer(state)
+    }
   })
 
   addCase(actions.removePlayer, (state, { payload }) => {
+    if (state.dealer === payload.id) {
+      state.dealer = getNextDealer(state)
+    }
+
     delete state.players[payload.id]
   })
 
@@ -85,12 +98,11 @@ export const wizardReducer = createReducer(defaultState, ({ addCase }) => {
   })
 })
 
-function getNextDealer(state: WizardState): UUID {
+function getNextDealer(state: WizardState): UUID | null {
   const playerIds = Object.values(state.players).map((player) => player.id)
 
-  if (state.dealer === null) {
-    return playerIds[0]
-  }
+  if (playerIds.length === 0) return null
+  if (state.dealer === null) return playerIds[0]
 
   let nextDealerIndex = playerIds.indexOf(state.dealer) + 1
   if (nextDealerIndex >= playerIds.length) {

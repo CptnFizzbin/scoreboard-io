@@ -10,6 +10,10 @@ export const removePlayer = createAction<{ id: UUID }>("players/removePlayer")
 
 export const startNewGame = createAction("game/wizard/newGame")
 
+export const setDealer = createAction<{ playerId: UUID }>(
+  "game/wizard/setDealer",
+)
+
 export const setBid = createAction<{ playerId: UUID; bid: number }>(
   "game/wizard/setBid",
 )
